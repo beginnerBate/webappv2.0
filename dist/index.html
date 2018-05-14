@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+  <meta name="full-screen" content="yes">
+  <meta name="browsermode" content="application">
+  <meta name="x5-orientation" content="portrait"><meta name="x5-fullscreen" content="true"><meta name="x5-page-mode" content="app">
+  <title>智能医疗检测系统</title>
+  <link rel="stylesheet" href="common/css/common.css">
+  <link rel="stylesheet" href="common/css/home.css">
+  <link rel="stylesheet" href="common/css/page.css">
+</head>
+<body class="home">
+  <section class="header">
+    <div class="nav-wrapper">
+      <ul class="nav">
+        <li class="active"><span>体温监测</span></li>
+        <li><span>输液报警</span></li>
+        <li><span>输液监测</span></li>
+        <li><span>白板</span></li>
+      </ul>
+    </div>
+    <div class="time-wrapper">
+      <p class="time">2018-05-14 11:15:07</p>
+    </div>
+  </section>
+  <section class="page">
+    <!-- temp-page -->
+    <div class="h-page active">
+      <div class="page-wrapper">
+        <div class="content">
+          <ul class="item-list">
+            <li>
+              <div class="m-temp-item">
+                <p class="bed-num">床号：14</p> 
+                <p class="temp-txt">36.6℃</p> 
+                <p class="time">12:06:18</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- alarm-page -->
+    <div class="h-page">
+      <div class="page-wrapper">
+        <div class="content">
+          <ul class="item-list">
+            <li>
+              护手霜
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- trans-page -->
+    <div class="h-page">输液监测</div>
+    <!-- board-page -->
+    <div class="h-page">白板</div>
+  </section>
+</body>
+<script src="common/bin/axios.min.js"></script>
+<script src="common/js/home.js"></script>
+<script src="common/js/temp.js"></script>
+<script src="common/js/alarm.js"></script>
+</html>
