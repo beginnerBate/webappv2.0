@@ -24,46 +24,99 @@
       </ul>
     </div>
     <div class="time-wrapper">
-      <p class="time">2018-05-14 11:15:07</p>
+      <p class="time">2018-05-14 11:15:07 设置</p>
     </div>
   </section>
   <section class="page">
     <!-- temp-page -->
     <div class="h-page active">
-      <div class="page-wrapper">
+      <div class="page-wrapper" id="temp">
         <div class="content">
-          <ul class="item-list">
-            <li>
-              <div class="m-temp-item">
-                <p class="bed-num">床号：14</p> 
-                <p class="temp-txt">36.6℃</p> 
-                <p class="time">12:06:18</p>
-              </div>
-            </li>
+          <ul class="item-list" id="tempList">
           </ul>
         </div>
       </div>
     </div>
     <!-- alarm-page -->
     <div class="h-page">
-      <div class="page-wrapper">
+      <div class="page-wrapper" id="alarm">
         <div class="content">
-          <ul class="item-list">
-            <li>
-              护手霜
-            </li>
+          <ul class="item-list" id="alarmList">
           </ul>
         </div>
       </div>
     </div>
     <!-- trans-page -->
-    <div class="h-page">输液监测</div>
+    <div class="h-page">
+    	<div class="page-row">
+    		<!--输液监测列表-->
+	    	<div class="page-left">
+	    		<div id="transwrapper" class="trans-wrapper">
+	    			<ul id="transList" class="item-list">
+	    				<li>
+	    					<div class="m-trans-item" click="showTrans(item)">
+				          <p>床号: 09</p>
+				          <p>容量: 22 <i>mL</i></p>
+				          <p>剩量: 66 <i>mL</i></p>
+				          <p>滴速: 55  <i> 滴/分</i></p>
+				        </div>
+	    				</li>
+	    				<li>
+	    					<div class="pos m-trans-item danger" click="showTrans(item)">
+				          <p>床号: 09</p>
+				          <p>容量: 22 <i>mL</i></p>
+				          <p>剩量: 66 <i>mL</i></p>
+				          <p>滴速: 55  <i> 滴/分</i></p>
+				          <span class="close"  click="showMsg(item.infusionMonitorId)">x</span>
+				        </div>
+	    				</li>
+	    				<li>
+	    					<div class="m-trans-item warning" click="showTrans(item)">
+				          <p>床号: 09</p>
+				          <p>容量: 22 <i>mL</i></p>
+				          <p>剩量: 66 <i>mL</i></p>
+				          <p>滴速: 55  <i> 滴/分</i></p>
+				        </div>
+	    				</li>
+	    			</ul>
+	    		</div>
+	    	</div>
+	    	<!--输液报警栏 -->
+	    	<div class="page-right">
+	    		<div class="m-trans-alarm-warning">
+		        <!-- 20ml 报警 -->
+		        <h1>20mL 报警</h1>
+		        <div class="m-trans-alarm-wrapper" id="trans20">
+		          <ul id="transList20">
+		            <li>
+		              <span>床号：{{item.bedNumber}}</span>
+		              <span>剩量：{{item.surplus}}mL</span>
+		            </li>
+		          </ul>
+		        </div>
+		      </div>
+		      <div class="m-trans-alarm-danger">
+		        <!-- 10ml 报警 -->
+		        <h1>10mL 报警</h1>
+		        <div class="m-trans-alarm-wrapper" id="trans10">
+		          <ul id="transList10">
+		            <li>
+		              <span>床号：{{item.bedNumber}}</span>
+		              <span>剩量：{{item.surplus}}mL</span>
+		            </li>         
+		          </ul>
+		        </div>
+		      </div>
+	    	</div>
+    	</div>
+    </div>
     <!-- board-page -->
     <div class="h-page">白板</div>
   </section>
 </body>
-<script src="common/bin/axios.min.js"></script>
+<script src="common/bin/bscroll.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="common/js/home.js"></script>
 <script src="common/js/temp.js"></script>
 <script src="common/js/alarm.js"></script>
+<script src="common/js/trans.js"></script>
 </html>

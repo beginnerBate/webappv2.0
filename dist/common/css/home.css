@@ -9,6 +9,8 @@
   font-size: 20px;
   background: #409eff;
   border-bottom: 1px solid #f1f7fd;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 .header>div{
@@ -38,7 +40,133 @@
 }
 .h-page{
   display: none;
+  height: 100%;
 }
 .h-page.active{
   display: block;
+}
+.pos{
+	position:relative;
+}
+.close{
+	cursor: pointer;
+  position: absolute;
+  color: #f56c6c;
+  font-size: 15px;
+  line-height: 15px;
+  top: 4px;
+  right: 6px;
+  width: 19px;
+  height: 19px;
+  border: 1px solid #bfdeaf;
+  border-radius: 50%;
+  text-align: center;
+  background: #bfdeaf;
+}
+.alarm-icon{
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  -webkit-transform: scale(.3);
+          transform: scale(.3);
+  -webkit-transform-origin: center top;
+          transform-origin: center top;
+}
+.alarm-icon i {
+  display: inline-block;
+}
+.alarm-icon>.light{
+  position: absolute;
+  width: 10px;
+  height: 30px;
+  border-radius: 10px;
+  background-color:#ff9600;
+}
+.alarm-icon>.light:first-child{
+  -webkit-transform-origin: 0% 100%;
+          transform-origin: 0% 100%;
+  top:0;
+  left: 10px;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.alarm-icon>.light:nth-child(2){
+  top:-6px;
+  left: 25px;
+}
+.alarm-icon>.light:nth-child(3){
+  top:0;
+  right: 10px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  -webkit-transform-origin: 100% 100%;
+          transform-origin: 100% 100%;
+}
+.alarm-icon>.main{
+  position: absolute;
+  top:30px;
+  left:0;
+  width: 60px;
+  height: 65px;
+  background: #f73030;
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+.alarm-icon>.bottom{
+  position: absolute;
+  top:95px;
+  left: -10px;
+  width: 80px;
+  height: 25px;
+  background: #da1c1c;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.myanimate{
+  width: 119px;
+  height: 120px;
+  border-radius: 50%;
+  -webkit-animation: myfirst 2s ease infinite;
+          animation: myfirst 2s ease infinite;
+  -webkit-filter: blur(25px);
+          filter: blur(25px);
+  left: -31px;
+  top: -7px;
+  position: absolute;
+  background: #ff0000;
+}
+/* ------------------800px---------------------------*/
+@media screen and (max-width: 800px) {
+	.header{
+  height: 45px;
+  padding: 5px;
+  font-size: 12px;
+  background: #409eff;
+}
+.header>div{
+  display: inline-block;
+  height: 100%;
+}
+.nav>li{
+  display: inline-block;
+  border-radius: 4px;
+  padding: 8px 2px;
+  margin: 0 1px;
+  color: #d4d4d4;
+  cursor: pointer;
+}
+.nav>li.active{
+  color:#fff;
+  background:#e6a23c;
+}
+.time-wrapper{
+  margin-left: auto;
+  padding: 8px 2px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #f2f2f2;
+  border-radius: 5px;
+  text-shadow: 1px 1px 4px #0957a7;
+}
 }

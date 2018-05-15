@@ -1,5 +1,5 @@
 # 智能医疗护理平台V2.0
-
+> chrome 内核35.0 + android5.1
 > 新增智能语音播放功能
 
 > 感受一下css2.0 的流布局
@@ -19,3 +19,6 @@
 2. 警报数据获取
 3. 输液监测数据获取
 ```
+#开发笔记记录
+1. nodeList 转数组之后遍历  Array.prototype.slice.call(anchors) 少用for 循环 注意闭包问题
+2. 媒体查询小于800px 的布局 @media screen and (max-width: 800px) 
