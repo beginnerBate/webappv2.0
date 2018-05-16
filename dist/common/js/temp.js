@@ -2,11 +2,15 @@
 var temp = {
 	tempList: document.getElementById('tempList'),
 	timer:"",
-	init: function (myUrl) {
-		this.getData(myUrl)
-		this.refresh()
+	init: function () {
+		this.getData()
+		var that = this
+		this.timer = setInterval(function(){
+				that.getData()
+				console.log('timer',200)
+		},TIMES)
 	},
-	getData:function(myUrl) {
+	getData:function() {
 		var that = this
 		//获取体温数据
 		axios.get(myUrl+'newestTemperatures.json')
@@ -15,8 +19,7 @@ var temp = {
 			if (data.code == 200) {
 				that.list = data.data
 				// dom 渲染
-				that.dataRender(that.list)
-				
+				that.dataRender(that.list)			
 			}
 		})
 	},
@@ -45,16 +48,8 @@ var temp = {
 			}
 		})
 	},
-	refresh: function () {
-		//两秒刷新一次
-		var that = this
-		this.timer = setInterval(function(){
-			that.init()
-		},TIMES)
-	},
 	desorty: function () {
 		//清除 定时器
 		clearInterval(this.timer)
-	    // 清除 demo
 	}
 }

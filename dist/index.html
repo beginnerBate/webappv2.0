@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="common/bin/css/font-awesome.min.css"/>
   <link rel="stylesheet" href="common/css/home.css">
   <link rel="stylesheet" href="common/css/page.css">
+  <link rel="stylesheet" href="common/css/board.css">
 </head>
 <body class="home">
   <section class="header">
@@ -56,7 +57,7 @@
 	    	<div class="page-left">
 	    		<div id="transwrapper" class="trans-wrapper">
 	    			<ul id="transList" class="item-list">
-	    				<li>
+	    				<!--<li>
 	    					<div class="m-trans-item" click="showTrans(item)">
 				          <p>床号: 09</p>
 				          <p>容量: 22 <i>mL</i></p>
@@ -80,7 +81,7 @@
 				          <p>剩量: 66 <i>mL</i></p>
 				          <p>滴速: 55  <i> 滴/分</i></p>
 				        </div>
-	    				</li>
+	    				</li>-->
 	    			</ul>
 	    		</div>
 	    	</div>
@@ -114,9 +115,96 @@
     	</div>
     </div>
     <!-- board-page -->
-    <div class="h-page">白板</div>
+    <div class="h-page">
+    	<div id="eboard">
+    			<!-- 全屏画布 -->
+	<canvas id="canvas"></canvas>
+	<!-- 功能菜单 -->
+	<ul id="menu">
+		<li>
+			<span class="fa fa-pencil fa-fw"> </span>
+		</li>
+		<li>
+			<span class="fa fa-italic"></span>
+		</li>
+		<li>
+			<span></span>
+		</li>
+		<li>
+			<span></span>
+		</li>
+		<li>
+			<span class="fa fa-cog"></span>
+		</li>
+		<li>
+			<span class="fa fa-asterisk"></span>
+		</li>
+		<li>
+			<span class="fa fa-eraser "></span>
+		</li>
+		<li>
+			<span class="fa fa-repeat"></span>
+		</li>
+		<li>
+			<span class="fa fa-arrow-circle-down"></span>
+		</li>		
+	</ul>
+	<!-- 颜色画笔选择侧边栏 -->
+	<div id="sidebar">
+		<div class="sidebar-draw">
+			<h2>画笔</h2>
+			<ul>
+				<li>
+					<span></span>
+				</li>
+				<li>
+					<span></span>
+				</li>
+				<li>
+					<span></span>
+				</li>
+				<li>
+					<span></span>
+				</li>
+				<li>
+					<span></span>
+				</li>
+				<li>
+					<span></span>
+				</li>			
+			</ul>
+		</div>
+		<div class="sidebar-color">
+			<h2>颜色</h2>
+			<ul>
+				<li></li>
+				<li></li>				
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+	<!-- 弹窗提示框 -->
+	<div id="tip" class="tip">
+		<div class="tip-main">
+			<span></span>
+			<span class="text">你选择了红色！</span>
+		</div>
+	</div>
+	<!-- 鼠标右键菜单 -->
+	<div id="contextmenu" class="contextmenu">
+		<ul>
+			<li>Canvas画板 v3.20</li>
+			<li>全屏模式</li>
+			<li>保存绘画</li>
+		</ul>
+	</div>
+    	</div>
+    </div>
   </section>
-  
   <div id="box" class="box-wrapper ip-set">
   	<div class="box-content">
   		<div class="box-header">
@@ -147,4 +235,5 @@
 <script src="common/js/temp.js"></script>
 <script src="common/js/alarm.js"></script>
 <script src="common/js/trans.js"></script>
+<script src="common/js/eboard.js"></script>
 </html>

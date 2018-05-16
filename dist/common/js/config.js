@@ -8,7 +8,8 @@
  存在localstorage里面
  * */
 var BASEURL = 'https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/'
-var TIMES = 2000
+var TIMES = 3000
+var myUrl = ''
 // 初始化 
 initData([
 	{name:'port', value:''},
@@ -24,7 +25,8 @@ var config = {
 	setUrl: function () {
 		this.data.port = getItem('port',true)
 		this.data.ip = getItem('ip',true)
-		var url = "http://" + undefined.data.ip + ":" + undefined.data.port + "/webservice/"
+		var url = "http://" + this.data.ip + ":" + this.data.port + "/webservice/"
+		myUrl = url
 		setItem('url',url)
 		console.log(url)
 	},
@@ -80,10 +82,53 @@ function formatDate(date, fmt) {
 function padLeftZero(str) {
     return ('00' + str).substr(str.length);
 };
-function getJiFenDetailInfo(url) {
-      return axios.get(url).then(function(res){
-        return Promise.resolve(res);
-      },function(err){
-        return Promise.reject(err);
-      });
-}
+
+//观察者模式 实现页面的加载和刷新
+var Observer = (function(){
+	var _message = {}
+	return {
+		//注册信息接口
+		regist: function(type, fn) {
+			//如果消息不存在则应创建一个该消息类型
+			if (typeof _message[type] === 'undefined') {
+				_message[type] = [fn]
+			}else {
+				_message[type].push(fn)
+			}
+		},
+		//发布信息接口
+		fire: function(type, args) {
+			if (!_message[type]){
+				// 如果该消息没有被注册，则返回
+				return
+			}
+			//定义消息信息
+			var events = {
+				type: type,
+				args: args || {}
+			},
+			 i = 0 ,
+			len = _message[type].length
+			for (; i < len; i++){
+				//依次执行注册的消息对应的动作序列
+				_message[type][i].call(this,events)
+			}
+		},
+		//移除信息接口
+		remove:function (type,fn){
+			if (_message[type] instanceof Array) {
+				var i = _message[type].length - 1
+				for (; i>=0;i--) {
+					_message[type][i] === fn && _message[type].splice(i,1)
+					
+				}
+			}
+		}
+
+	}
+})();
+
+Observer.regist('test', function (e) {
+	console.log(e.args.msg)	
+})
+Observer.fire('test',{msg:'参数传递'})

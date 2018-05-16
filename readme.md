@@ -28,3 +28,4 @@
 #### 3. ip-set 模块设置 设置IP 并且存在本地 IP 可以修改
 1. ipset 样式设置 利用  vertical-align: middle;
 2. 需要图标字体 引入图标字体 font-awesome
+#### 4. 观察者模式初探
