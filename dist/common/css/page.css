@@ -29,7 +29,72 @@
     border-radius: 6px;
     padding: 0.5em;
 }
-
+/*ip-set-page*/
+.ip-set{
+	background: #fff;
+	display: none;
+}
+.ip-set .box-header{
+	background: #fff;
+	font-size: 18px;
+	letter-spacing: 4px;
+	background: #409EFF;
+	color:#fafafa;
+	border-top-right-radius:6px;
+	border-top-left-radius:6px;
+	padding: 12px;
+}
+.ip-set .box-content{
+	border-radius: 6px;
+	-webkit-box-shadow: 1px 1px 5px #d4d4d4;
+	        box-shadow: 1px 1px 5px #d4d4d4;
+}
+.form-wrapper{
+	padding: 12px 20px;
+	width: 400px;
+}
+.ls5{
+	letter-spacing: 5px;
+}
+.form-row {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	margin: 26px 0;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+.form-row>label{
+	-webkit-box-flex: 0;
+	    -ms-flex: 0 0 6ch;
+	        flex: 0 0 6ch;
+	color:#333;
+}
+.form-row > input{
+   -webkit-box-flex: 1;
+       -ms-flex: 1;
+           flex: 1;
+   height: 36px;
+   border-radius: 3px;
+   outline: none;
+   -webkit-appearance: none;
+      -moz-appearance: none;
+           appearance: none;
+   border:1px solid #D4D4D4;
+   padding: 0 20px;
+}
+.btn{
+	max-width: 100px;
+	margin: 0 auto;
+	color:#fafafa;
+	font-size: 16px;
+	letter-spacing: 4px;
+	background: #409EFF;
+}
+.btn:active{
+	color:#fff;
+}
 /* temp-page */
 .bed-num{
     color: #FFFFFF;
@@ -123,7 +188,9 @@
 }
 
 .m-trans-alarm-warning{
-    flex: 0 0 38vh;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 38vh;
+            flex: 0 0 38vh;
 }
 .m-trans-alarm-warning h1{
     background: #E6A23C;
@@ -147,12 +214,18 @@
 .m-trans-alarm-wrapper ul li {
     border-bottom: 1px solid #d4d4d4;
     padding: 12px 16px;
-    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    justify-content: space-around;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
 }
 .m-trans-alarm-danger{
-    flex: 0 0 38vh;
+    -webkit-box-flex: 0;
+        -ms-flex: 0 0 38vh;
+            flex: 0 0 38vh;
     margin-top: 20px;
 }
 .m-trans-alarm-danger h1{

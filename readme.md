@@ -20,5 +20,11 @@
 3. 输液监测数据获取
 ```
 #开发笔记记录
-1. nodeList 转数组之后遍历  Array.prototype.slice.call(anchors) 少用for 循环 注意闭包问题
-2. 媒体查询小于800px 的布局 @media screen and (max-width: 800px) 
+
+#### 1. nodeList 转数组之后遍历  Array.prototype.slice.call(anchors) 少用for 循环 注意闭包问题
+
+#### 2. 媒体查询小于800px 的布局 @media screen and (max-width: 800px) 
+
+#### 3. ip-set 模块设置 设置IP 并且存在本地 IP 可以修改
+1. ipset 样式设置 利用  vertical-align: middle;
+2. 需要图标字体 引入图标字体 font-awesome

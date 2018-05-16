@@ -10,6 +10,7 @@
   <meta name="x5-orientation" content="portrait"><meta name="x5-fullscreen" content="true"><meta name="x5-page-mode" content="app">
   <title>智能医疗检测系统</title>
   <link rel="stylesheet" href="common/css/common.css">
+  <link rel="stylesheet" href="common/bin/css/font-awesome.min.css"/>
   <link rel="stylesheet" href="common/css/home.css">
   <link rel="stylesheet" href="common/css/page.css">
 </head>
@@ -24,7 +25,9 @@
       </ul>
     </div>
     <div class="time-wrapper">
-      <p class="time">2018-05-14 11:15:07 设置</p>
+      <p class="time">2018-05-14 11:15:07 <span id="updataIp">
+      	服务器设置
+      </span></p>
     </div>
   </section>
   <section class="page">
@@ -113,8 +116,33 @@
     <!-- board-page -->
     <div class="h-page">白板</div>
   </section>
+  
+  <div id="box" class="box-wrapper ip-set">
+  	<div class="box-content">
+  		<div class="box-header">
+  			<i class="fa fa-cog"></i><span> 服务器设置</span>
+  		</div>
+  		<div class="form-wrapper">
+  			<span id="tip"><i class="fa  fa-check-circle"></i> 设置成功</span>
+  			<span id="error"></span>
+  			
+				<div class="form-row">
+					<label class="ls5">IP：</label>
+					<input type="text" id="ip" value="" />
+				</div>
+				<div class="form-row ">
+					<label>端口：</label><input type="text" id="port" />
+				</div>
+				<div class="form-row">
+					<input type="button" id="setIp" class="btn" value="确定"/>
+				</div>
+  		</div>
+  	</div>
+  </div>
 </body>
-<script src="common/bin/bscroll.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="common/js/config.js" charset="utf-8"></script>
+<script src="common/bin/bscroll.min.js" charset="utf-8"></script>
+<script src="common/bin/axios.min.js" charset="utf-8"></script>
 <script src="common/js/home.js"></script>
 <script src="common/js/temp.js"></script>
 <script src="common/js/alarm.js"></script>
