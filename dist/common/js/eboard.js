@@ -26,8 +26,6 @@ var drawBoard = {
 		this.selectColor();
 		//粗细选择
 		this.selectLine();
-		//自定义菜单
-		this.customMenu();
 	},
 		//显示画板
 	showBoard : function(){
@@ -45,42 +43,37 @@ var drawBoard = {
 		menu.style.display = 'block';
 
 		//取消菜单上的冒泡
-		menu.onmousedown = function(ev){
-
+		menu.ontouchstart = function(ev){
 			var ev = ev||event;
 			ev.cancelBubble = true;
 		};
 		//菜单滑出
 		setTimeout(function(){
 			menu.style.top = '0';
-			btn.className = 'fa fa-fa-arrow-circle-down';
-			that.showTip('欢迎使用画板！鼠标绘画哟～');
 		},500);
 	},
 		//画笔功能
 	drawPen : function(){
 
 		var that = this;
-		document.onmousedown = function(ev){
+		var docEle = document.getElementById('eboard')
+		docEle.ontouchstart = function(ev){
 
 			var ev = ev||event;
-			var sx = ev.clientX;
-			var sy = ev.clientY;
+			var sx = ev.changedTouches[0].clientX;
+			var sy = ev.changedTouches[0].clientY;
 			that.gloaObj.PENS++;
 			//画笔性能优化 没36ms取一个点
 			var onOff = true;
-
-			document.onmousemove = function(ev){
-
+			docEle.ontouchmove = function(ev){
 				if(!onOff) return;
 				onOff = false;
 				setTimeout(function(){
-
 					onOff = true;
 				},36);
 				var ev = ev||event;
-				var ex = ev.clientX;
-				var ey = ev.clientY;
+				var ex = ev.changedTouches[0].clientX;
+				var ey = ev.changedTouches[0].clientY;
 				var n = that.gloaObj.DATA.length;
 
 				that.gloaObj.DATA[n] = new Object();
@@ -108,29 +101,27 @@ var drawBoard = {
 				sy = ey;
 			};
 
-			document.onmouseup = function(){
-
-				document.onmousemove = '';
+			docEle.ontouchend = function(){
+				docEle.ontouchmove = '';
 			};
-
 			return false;
 		};
 	},
 		//直线绘制
 	drawLine : function(){
-
-		document.onmousedown = function(ev){
+		var docEle = document.getElementById('eboard')
+		docEle.ontouchstart = function(ev){
 
 			var ev = ev||event;
-			var sx = ev.clientX;
-			var sy = ev.clientY;
+			var sx = ev.changedTouches[0].clientX;
+			var sy = ev.changedTouches[0].clientY;
 			var n = drawBoard.gloaObj.DATA.length;
 
-			document.onmousemove = function(ev){
+			docEle.ontouchmove = function(ev){
 
 				var ev = ev||event;
-				var ex = ev.clientX;
-				var ey = ev.clientY;
+				var ex = ev.changedTouches[0].clientX;
+				var ey = ev.changedTouches[0].clientY;
 
 				drawBoard.gloaObj.DATA[n] = new Object();
 				drawBoard.gloaObj.DATA[n].attr = 'line';
@@ -145,28 +136,28 @@ var drawBoard = {
 				drawBoard.render();
 			}
 
-			document.onmouseup = function(){
+			docEle.ontouchend = function(){
 
-				document.onmousemove = '';
+				docEle.ontouchmove = '';
 			};
 			return false;
 		};
 	},
 		//圆形绘制
 	drawCircle : function(){
-
-		document.onmousedown = function(ev){
+var docEle = document.getElementById('eboard')
+		docEle.ontouchstart = function(ev){
 
 			var ev = ev||event;
-			var sx = ev.clientX;
-			var sy = ev.clientY;
+			var sx = ev.changedTouches[0].clientX;
+			var sy = ev.changedTouches[0].clientY;
 			var n = drawBoard.gloaObj.DATA.length;
 
-			document.onmousemove = function(ev){
+			docEle.ontouchmove = function(ev){
 
 				var ev = ev||event;
-				var ex = ev.clientX;
-				var ey = ev.clientY;
+				var ex = ev.changedTouches[0].clientX;
+				var ey = ev.changedTouches[0].clientY;
 
 				var cx = ex - sx;
 				var cy = ey - sy;
@@ -183,28 +174,28 @@ var drawBoard = {
 				drawBoard.render();
 			};
 
-			document.onmouseup = function(){
+			docEle.ontouchend = function(){
 
-				document.onmousemove = '';
+				docEle.ontouchmove = '';
 			};
 			return false;
 		};
 	},
 	//矩形绘制
 	drawRect : function(){
-
-		document.onmousedown = function(ev){
+var docEle = document.getElementById('eboard')
+		docEle.ontouchstart = function(ev){
 
 			var ev = ev||event;
-			var sx = ev.clientX;
-			var sy = ev.clientY;
+			var sx = ev.changedTouches[0].clientX;
+			var sy = ev.changedTouches[0].clientY;
 			var n = drawBoard.gloaObj.DATA.length;
 
-			document.onmousemove = function(ev){
+			docEle.ontouchmove = function(ev){
 
 				var ev = ev||event;
-				var ex = ev.clientX;
-				var ey = ev.clientY;
+				var ex = ev.changedTouches[0].clientX;
+				var ey = ev.changedTouches[0].clientY;
 
 				var cx = ex - sx;
 				var cy = ey - sy;
@@ -220,9 +211,9 @@ var drawBoard = {
 				drawBoard.render();
 			};
 
-			document.onmouseup = function(){
+			docEle.ontouchend = function(){
 
-				document.onmousemove = '';
+				docEle.ontouchmove = '';
 			};
 
 			return false;
@@ -231,16 +222,16 @@ var drawBoard = {
 
 	//橡皮擦功能
 	eraser : function(){
-
+var docEle = document.getElementById('eboard')
 		var that = this;
-		document.onmousedown = function(){
+		docEle.ontouchstart = function(){
 
 			that.gloaObj.ERAS++;
-			document.onmousemove = function(ev){
+			docEle.ontouchmove = function(ev){
 
 				var ev = ev||event;
-				var ex = ev.clientX;
-				var ey = ev.clientY;
+				var ex = ev.changedTouches[0].clientX;
+				var ey = ev.changedTouches[0].clientY;
 				var n = that.gloaObj.DATA.length;
 
 				that.gloaObj.DATA[n] = new Object();
@@ -260,9 +251,9 @@ var drawBoard = {
 				that.gloaObj.CTX.fill();
 
 			};
-			document.onmouseup = function(){
+			docEle.ontouchend = function(){
 
-				document.onmousemove = '';
+				docEle.ontouchmove = '';
 			};
 
 			return false;
@@ -326,7 +317,7 @@ var drawBoard = {
 		var arrColor = ['#f00056','#fff','#faff72','#44cef6','#00bc12','#ffa400','#000'];
 
 		//取消冒泡
-		bar.onmousedown = function(ev){
+		bar.ontouchstart = function(ev){
 
 			var ev = ev||event;
 			ev.cancelBubble = true;
@@ -354,7 +345,7 @@ var drawBoard = {
 		var arrLine = [3,6,9,12,15,20];
 
 		//取消冒泡
-		bar.onmousedown = function(ev){
+		bar.ontouchstart = function(ev){
 			var ev = ev||event;
 			ev.cancelBubble = true;
 		};
@@ -420,7 +411,6 @@ var drawBoard = {
 		var that = this;
 		var menu = document.getElementById('menu');
 		var item = menu.getElementsByTagName('li');
-		var btn = item[8].getElementsByTagName('span')[0];
 		var bar = document.getElementById('sidebar');
 		var barDraw = bar.querySelector('.sidebar-draw');
 		var barColor = bar.querySelector('.sidebar-color');
@@ -481,86 +471,44 @@ var drawBoard = {
 				that.showTip('撤退无效！你没有绘画！','remove');
 			}
 		};
-		//隐藏与显示工具栏
-		item[8].onclick = function(){
-
-			menu.style.top = '-400px';
-			showOff = false;
-			btn.className = 'fa fa-arrow-circle-down';
-		};
-		item[8].onmouseover = function(){
-
-			if(showOff) return;
-			showOff = true;
-			
-			menu.style.top = '0';
-			btn.className = 'fa fa-arrow-circle-up';
-		};
+//		//隐藏与显示工具栏
+//		item[8].onclick = function(){
+//
+//			menu.style.top = '-400px';
+//			showOff = false;
+//			btn.className = 'fa fa-arrow-circle-down';
+//		};
+//		item[8].onmouseover = function(){
+//
+//			if(showOff) return;
+//			showOff = true;
+//			
+//			menu.style.top = '0';
+//			btn.className = 'fa fa-arrow-circle-up';
+//		};
 	},
 
 	//消息框 i参数为图标参数 不填默认ok（勾图标） 填remove（叉图标）
 	showTip : function(t,i){
 
-		var tip = document.getElementById('tip');
+		var tip = document.getElementById('btip');
 		var icon = tip.getElementsByTagName('span')[0]
 		var text = tip.getElementsByTagName('span')[1];
 
 		clearInterval(this.TIMER);
 		
-		i = i||'ok';
+		i = i||'check';
 		icon.className = 'fa fa-' + i;
 		text.innerHTML = t;
 		tip.style.display = 'block';
 		tip.style.transition = '0.5s';
 		setTimeout(function(){
-
 			tip.style.top = '50px'; 	
 		},16);
 		this.TIMER = setTimeout(function(){
-
 			tip.style.transition = '';
 			tip.style.display = 'none';
 			tip.style.top = '0';
 		},2000);
-	},
-
-	//自定义右键菜单
-	customMenu : function(){
-
-		var that = this;
-		var menu = document.getElementById('contextmenu');
-		var item = menu.getElementsByTagName('li');
-		var timer = null;
-		document.oncontextmenu = function(ev){
-
-			clearTimeout(timer);
-			
-			var ev = ev || event;
-			var sX = ev.clientX;
-			var sY = ev.clientY;
-
-			menu.style.display = 'block';
-			menu.style.left = sX + 'px';
-			menu.style.top = sY + 'px';
-			
-			timer = setTimeout(function(){
-
-				menu.style.display = 'none';
-			},3000);
-
-			return false;
-		};
-
-		menu.onclick = function(){
-
-			clearTimeout(timer);
-			this.style.display = 'none';
-		};
-
-		item[1].onclick = function(){
-
-			that.fullScreen();
-		};
-	},
-
+	}
 }

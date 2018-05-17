@@ -10,6 +10,7 @@
 var BASEURL = 'https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/'
 var TIMES = 3000
 var myUrl = ''
+var speekCon = ''
 // 初始化 
 initData([
 	{name:'port', value:''},
@@ -127,7 +128,6 @@ var Observer = (function(){
 
 	}
 })();
-
 Observer.regist('test', function (e) {
 	console.log(e.args.msg)	
 })

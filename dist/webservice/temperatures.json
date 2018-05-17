@@ -1,0 +1,47 @@
+{
+  "code": 200,
+  "pageCount": 3,
+  "curPage": 1,
+  "data": [
+    {
+      "temperatureValue": 38.8,
+      "recordTime": "1974-12-19 09:49:31"
+    },
+    {
+      "temperatureValue": 39.5,
+      "recordTime": "2002-01-07 08:38:26"
+    },
+    {
+      "temperatureValue": 40.1,
+      "recordTime": "1994-01-16 18:53:57"
+    },
+    {
+      "temperatureValue": 39.2,
+      "recordTime": "1995-09-24 07:11:52"
+    },
+    {
+      "temperatureValue": 36.2,
+      "recordTime": "1993-01-06 03:01:17"
+    },
+    {
+      "temperatureValue": 36.4,
+      "recordTime": "1997-02-07 02:18:48"
+    },
+    {
+      "temperatureValue": 38.4,
+      "recordTime": "2001-04-09 04:11:06"
+    },
+    {
+      "temperatureValue": 38.3,
+      "recordTime": "1979-12-12 16:01:08"
+    },
+    {
+      "temperatureValue": 39.7,
+      "recordTime": "2014-12-14 13:56:19"
+    },
+    {
+      "temperatureValue": 40.2,
+      "recordTime": "1995-06-07 11:52:36"
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 #menu{
 	position: absolute;
 	z-index:3;
-	background:#000;
+	background:#e6a23c;
 	left: 0;
 	top: -400px;
 	display:none;
@@ -184,7 +184,7 @@
 	}
 }
 
-.tip{
+.b-tip{
 	width: 350px;
 	height: 100px;
 	border: 1px solid #333;
@@ -198,10 +198,10 @@
 	display: none;
 	background: #fff;
 }
-.tip .tip-main{
+.b-tip .b-tip-main{
 	margin-top: 30px;
 }
-.tip .glyphicon{
+.b-tip .fa{
 	width: 30px;
 	height: 30px;
 	border: 1px solid #333;
@@ -211,7 +211,7 @@
 	text-align: center;
 	color: #333;
 }
-.tip .text{
+.b-tip .text{
 	font: 16px/40px "微软雅黑";
 }
 .contextmenu{

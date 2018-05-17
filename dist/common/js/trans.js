@@ -1,4 +1,5 @@
 var trans = {
+	listData:{},
 	init:function () {
        var transList = document.getElementById('transList')
        var transList10 = document.getElementById('transList10')
@@ -45,5 +46,12 @@ var trans = {
        var transScroll10 = new BScroll(transWrapper10)
        var transScroll20 = new BScroll(transWrapper20)
        //transList 20
+	},
+	loadData: function () {
+		//  10mL data 获取
+//		var data = {alarmValue1:10,alarmValue2:20,startTime: data,orderBy:'surplus',status:0}
+		var url = myUrl + 'infusionMonitors' + param(data)
+		//  20mL data 获取
+		//  10ml and 20mL and> 20mL 	
 	}
 }

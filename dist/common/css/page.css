@@ -118,6 +118,108 @@
     text-align: right;
     font-size: 12px;
 }
+/* temp-record-page */
+.temp-record{
+	min-width: 80vw;
+	max-width: 90vw;
+	height: 60vh;
+	background: #FFFFFF;
+}
+.temp-record-conent{
+	display: flex;
+	height: calc(60vh - 40px);
+}
+.temp-record-left{
+	background: #fafafa;
+	flex: 1 1 250px;
+	max-width: 260px;
+	border-right:1px solid #d4d4d4;
+}
+.temp-record-left ul{
+	height: calc(100% - 40px);
+}
+.temp-record-left footer{
+	height: 40px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	color: #393939;
+}
+.temp-record-left footer i{
+	letter-spacing: 2px;
+}
+.temp-record-left footer span{
+	display: inline-block;
+	line-height: 30px;
+	padding: 0 12px;
+	border-radius: 4px;
+	background-color: #00569b;
+	color:#FFFFFF;
+	margin: 0 12px;
+	cursor: pointer;
+	height: 30px;
+}
+.temp-record-left footer span.disabled{
+	background-color: #999;
+	color:#393939;
+}
+.temp-record-right{
+	flex: 1;
+	height: calc(60vh - 40px);
+}
+.temp-list{
+	display: flex;
+	flex-direction: column;
+} 
+.temp-list>li{
+    flex: 1 1 calc((60vh - 80px) / 11);
+    max-height: calc((60vh - 80px) / 11);
+    height: calc((60vh - 80px) / 11);
+    color: #999999;
+    font-size: 14px;
+    padding: 0 6px;
+    border-bottom: 1px solid  #ededed;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.temp-list>li:nth-of-type(2n+1) {
+	background: #FFFFFF;
+}
+.temp-list>.temp-list-title{
+	font-size: 14px;
+	font-weight: 600;
+	color: #393939;
+}
+/* alarm-alert-page*/
+.alarm-alert{
+	padding: 32px;
+}
+.alarm-alert p{
+	font-size: 16px;
+	letter-spacing: 2px;
+	color:#999999;
+	padding-bottom:32px;
+	text-align: center;
+}
+.btn-wrapper>span{
+	cursor: pointer;
+	min-width: 80px;
+	height: 32px;
+	line-height: 32px;
+	font-size:14px;
+	letter-spacing: 3px;
+	border-radius: 4px;
+	display: inline-block;
+	margin:0 20px;
+	color:#fafafa;
+	text-align: center;
+	background: #398dee;
+}
+.btn-wrapper>span:first-child{
+	background: #d6d6d6;
+}
 /* trans-page */
 .page-row{
     display: -webkit-box;

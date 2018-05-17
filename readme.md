@@ -29,3 +29,27 @@
 1. ipset 样式设置 利用  vertical-align: middle;
 2. 需要图标字体 引入图标字体 font-awesome
 #### 4. 观察者模式初探
+
+#### 5. 电子白板 
+```javascript
+onmousedown ==> ontouchstart
+onmousemove ==> ontouchmove
+onmouseup ==>  ontouchend
+ev.clientX ==> ev.changedTouches[0].clientX
+ev.clientY ==> ev.changedTouches[0].clientY
+docuemnt ==> document.getEleById('eboard')
+```
+
+#### 6. 温度详情页面
+
+1. 列表分页模块
+> 点击 item 弹出详细页面
+> 接口信息
+1. echart模块
+> 异步数据加载 
+#### 7. 输液报警模块
+1. 语音播报 
+2. 关闭语音播报
+#### 8. 输液监测模块
+#### 9. 服务器设置
+#### 10. 页面细节优化 路由刷新

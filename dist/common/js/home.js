@@ -108,7 +108,7 @@ window.onload = function () {
     		temp.desorty()
     		break;    		
     		case 1:
-    		alarm.init()
+    		alarm.desorty()
     		break;    		
     		case 2:
     		trans.init()
