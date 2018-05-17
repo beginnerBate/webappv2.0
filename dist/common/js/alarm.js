@@ -150,6 +150,6 @@ function openAudio() {
 	android.speak(speekCon)
 }
 function endAudio () {
-	android.stopSpeak()
-//	android.speakInit()
+//	android.stopSpeak()
+	android.speakInit()
 }
