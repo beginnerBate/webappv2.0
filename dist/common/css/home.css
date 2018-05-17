@@ -148,6 +148,7 @@
 	font-size: 0;
 	white-space: nowrap;
 	overflow: auto;
+	    z-index: 1;
 }
 .box-wrapper:after{
 	content:"";
@@ -252,6 +253,9 @@
 }
 .fa-volume-off i {
 	  color:red;
+}
+#pageHeader{
+	display: none;
 }
 /* ------------------800px---------------------------*/
 @media screen and (max-width: 800px) {

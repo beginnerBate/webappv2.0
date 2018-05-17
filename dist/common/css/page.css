@@ -85,7 +85,7 @@
    padding: 0 20px;
 }
 .btn{
-	max-width: 100px;
+	max-width: 120px;
 	margin: 0 auto;
 	color:#fafafa;
 	font-size: 16px;
@@ -94,6 +94,9 @@
 }
 .btn:active{
 	color:#fff;
+}
+.btn-info{
+	background: #999999;
 }
 /* temp-page */
 .bed-num{

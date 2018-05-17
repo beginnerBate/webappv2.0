@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="common/css/board.css">
 </head>
 <body class="home">
-  <section class="header">
+  <section class="header" id="pageHeader">
     <div class="nav-wrapper">
       <ul class="nav">
         <li class="active"><span>体温监测</span></li>
@@ -198,7 +198,7 @@
     </div>
   </section>
   <div id="box" class="box-wrapper ip-set">
-  	<div class="box-content">
+  	<div class="box-content" id="boxCon">
   		<div class="box-header">
   			<i class="fa fa-cog"></i><span> 服务器设置</span>
   		</div>
@@ -227,9 +227,9 @@
   <!--公共弹出框 end-->
   <!--sounds -->
     <p class="sounds" id="sounds">
-      <span><i class="fa fa-volume-off"><i>×</i></i></span>
+      <span><i class="fa fa-volume-off" id="soundsIcon"><i>×</i></i></span>
       <span>
-        <i  onclick="openAudio()">开</i><i class="active" onclick="endAudio()">关</i>
+        <i  onclick="openAudio()" id="volumeUp">开</i><i class="active" onclick="endAudio()" id="volumeOff">关</i>
       </span>
     </p>
 </body>

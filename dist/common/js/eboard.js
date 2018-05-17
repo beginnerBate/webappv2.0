@@ -15,7 +15,7 @@ var drawBoard = {
 	ele: document.getElementById(''),
 	//初始化
 	init : function(){
-
+        document.getElementById('sounds').style.display = 'none'
 		//显示画板
 		this.showBoard();
 		//默认画笔功能

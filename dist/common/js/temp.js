@@ -3,6 +3,7 @@ var temp = {
 	tempList: document.getElementById('tempList'),
 	timer:"",
 	init: function () {
+		document.getElementById('sounds').style.display = 'none'
 		this.getData()
 		var that = this
 		this.timer = setInterval(function(){

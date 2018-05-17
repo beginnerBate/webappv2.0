@@ -147,9 +147,18 @@ function delAlarm (infusionAlarmId) {
 function openAudio() {
 	alert(speekCon)
 	this.alarmList.innerHTML = speekCon
+	document.getElementById('soundsIcon').className = 'fa fa-volume-up'
+	document.getElementById('soundsIcon').innerHTML = ''
+	document.getElementById('volumeUp').classList.add('active')
+	document.getElementById('volumeOff').classList.remove('active')
+	console.log(this)
 	android.speak(speekCon)
 }
 function endAudio () {
+	document.getElementById('soundsIcon').className = 'fa fa-volume-off'
+	document.getElementById('soundsIcon').innerHTML = '<i>×</i>'
+	document.getElementById('volumeOff').classList.add('active')
+	document.getElementById('volumeUp').classList.remove('active')
 //	android.stopSpeak()
 	android.speakInit()
 }
