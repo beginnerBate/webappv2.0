@@ -53,3 +53,44 @@ docuemnt ==> document.getEleById('eboard')
 #### 8. 输液监测模块
 #### 9. 服务器设置
 #### 10. 页面细节优化 路由刷新
+
+### 服务器数据对接
+1. 系统时间对接
+```javascript
+// 接口: 
+        http://192.168.0.100:8888/webservice/common/sysDateTime
+// 结果: 
+        {
+          "sysDateTime": "2018-05-18 09:21:59"
+        }
+```
+2. 体温数据查询
+```javascript
+<!-- 接口 -->
+http://192.168.0.100:8888/webservice/newestTemperatures
+  headers:{
+    inpatientAreaCode:'001'
+  }
+<!-- 结果 -->
+{
+    "code": "200",
+    "data": [
+        {
+            "wardNumber": "101",
+            "recordTime": 1526357400000,
+            "bedNumber": "01",
+            "temperatureValue": 22
+        }
+    ]
+}
+<!-- 详情接口  -->
+```
+3. 输液报警
+```javascript
+http://192.168.0.100:8888/webservice/infusionAlarms?status=0
+
+```
+4. 输液监控 三个接口
+```javascript
+1. infusionMonitors
+```
