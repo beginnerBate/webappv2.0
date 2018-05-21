@@ -13,13 +13,13 @@
   <link rel="stylesheet" href="common/bin/css/font-awesome.min.css"/>
   <link rel="stylesheet" href="common/css/home.css">
   <link rel="stylesheet" href="common/css/page.css">
-  <link rel="stylesheet" href="common/css/board.css">
+  <link rel="stylesheet" href="common/css/set.css">
 </head>
 <!-- 智能医疗检测系统 手机版 -->
 <body class="home">
 	<!-- top导航 -->
 	  <section class="top-header">
-				<h1>体温监测</h1>
+				<h1 id="title">体温监测</h1>
 		</section>
 	<!-- 底部导航 -->
   <section class="header wap">
@@ -66,7 +66,46 @@
 		</div>
 		<!-- 系统设置 -->
 		<div class="h-page">
-			<p>系统设置</p>
+			<div class="page-set">
+				<div class="page-set-content">
+					<ul>
+						<li id="ipset">
+							<div>
+								<span class="name">IP</span>
+								<span class="name-value">192.168.0.255</span>
+								<span class="fa fa-angle-right"></span>
+							</div>
+						</li>
+						<li>
+							<div>
+								<span class="name">端口</span>
+								<span class="name-value">8888</span>
+								<span class="fa fa-angle-right"></span>
+							</div>
+						</li>
+					</ul>
+					<ul>
+						<li>
+							<div>
+								<span class="name">语音报警</span>
+								<span class="name-value"></span>
+								<span class="on-off">
+									<span class="on-off-btn"></span>
+								</span>
+							</div>
+						</li>
+						<li>
+							<div>
+								<span class="name">语音报警</span>
+								<span class="name-value"></span>
+								<span class="on-off on">
+									<span class="on-off-btn"></span>
+								</span>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
   </section>
   <div id="box" class="box-wrapper ip-set">
@@ -107,7 +146,9 @@
       <span>
         <i  onclick="openAudio()" id="volumeUp">开</i><i class="active" onclick="endAudio()" id="volumeOff">关</i>
       </span>
-    </p> -->
+		</p> -->
+		<!-- alert -->
+		<span class="alert" id="alert"></span>
 </body>
 
 <script src="common/bin/bscroll.min.js" charset="utf-8"></script>
@@ -115,7 +156,8 @@
 <!-- <script src="common/bin/echarts.common.min.js"></script> -->
 <script src="common/js/config.js" charset="utf-8"></script>
 <script src="common/js/temp.js"></script>
-<!-- <script src="common/js/alarm.js"></script> -->
+<script src="common/js/alarm.js"></script>
+<script src="common/js/set.js"></script>
 <script src="common/js/trans.js"></script>
 <script src="common/js/home.js"></script>
 </html>

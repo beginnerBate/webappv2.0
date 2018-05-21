@@ -3,12 +3,9 @@ var trans = {
 	soundBtn: '',
 	timer:"",
 	init:function () {
-			
-		// 打开声音开关 
-		this.soundBtn = document.getElementById('sounds')
-		this.soundBtn.style.display = 'block'
-
-		//  获取数据
+		//  1.设置标题
+		document.getElementById('title').innerText = '体温监测'
+		//  2.获取数据
 		this.loadData()
 
 		var that = this

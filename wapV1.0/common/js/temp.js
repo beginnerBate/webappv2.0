@@ -3,6 +3,8 @@ var temp = {
 	tempList: document.getElementById('tempList'),
 	timer:"",
 	init: function () {
+		//  1.设置标题
+		document.getElementById('title').innerText = '体温监测'
 		this.getData()
 		var that = this
 		this.timer = setInterval(function(){
