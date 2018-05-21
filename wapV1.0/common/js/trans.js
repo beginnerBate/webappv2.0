@@ -50,7 +50,7 @@ var trans = {
 				Axios.get(url).then(function(res){
 					var data = res.data
 					if (data.code ==200) {
-						that.renderHtml20(data.data)
+						// that.renderHtml20(data.data)
 					}
 				})
 			})
@@ -61,7 +61,7 @@ var trans = {
 				Axios.get(url).then(function(res){
 					var data = res.data
 					if (data.code ==200) {
-						that.renderHtml10(data.data)
+						// that.renderHtml10(data.data)
 					}
 				})
 			})

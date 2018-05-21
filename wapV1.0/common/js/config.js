@@ -8,7 +8,7 @@
  存在localstorage里面
  * */
 var BASEURL = 'https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/'
-var TIMES = 3000
+var TIMES = 50*1000
 var myUrl = ''
 var speekCon = ''
 var speakPlaying = false

@@ -8,7 +8,7 @@ window.onload = function () {
 	var home = {
 		init: function () {
 			// 如果flag == true 服务器已经设置 隐藏服务器设置页面 初始化页面
-			document.getElementById('pageHeader').style.display = 'flex'
+			// document.getElementById('pageHeader').style.display = 'flex'
 			var page = getItem('flag',true)   		
 			if (page) {
 				// 获取IP地址
@@ -92,10 +92,10 @@ window.onload = function () {
     		temp.init()
     		break;    		
     		case 1:
-    		alarm.init()
+    		trans.init()
     		break;    		
     		case 2:
-    		trans.init()
+    		// trans.init()
     		break;    		
     		case 3:
     		drawBoard.init()
@@ -111,10 +111,10 @@ window.onload = function () {
     		temp.desorty()
     		break;    		
     		case 1:
-    		alarm.desorty()
+				trans.desorty()
     		break;    		
     		case 2:
-    		trans.desorty()
+    		// trans.desorty()
     		break;    		
     		case 3:
     		// console.log('temp.init()')
@@ -136,15 +136,15 @@ var updataIp = {
 		this.box = document.getElementById('box')
 		
 		var that = this
-		this.ele.onclick = function() {
-			// 清空HTML
-		    // 获取IP和PORT
-		    var IP = getItem('ip',true)
-		    var PORT = getItem('port',true)
-			//  显示box 
-			that.renderpage(IP,PORT)
-			// console.log(that.box)
-		}
+		// this.ele.onclick = function() {
+		// 	// 清空HTML
+		//     // 获取IP和PORT
+		//     var IP = getItem('ip',true)
+		//     var PORT = getItem('port',true)
+		// 	//  显示box 
+		// 	that.renderpage(IP,PORT)
+		// 	// console.log(that.box)
+		// }
 	},
 	renderpage: function(IP,PORT){
 		var html = '<div class="box-header">'+
@@ -224,7 +224,7 @@ var systemTime = {
 		this.sysTime = document.getElementById('sysTime')
 		this.myTimer = setInterval(function(){
         that.loadData().then(function (data) {
-					that.sysTime.innerHTML = data.sysDateTime
+					// that.sysTime.innerHTML = data.sysDateTime
 				})
 		},1000)
 	},
