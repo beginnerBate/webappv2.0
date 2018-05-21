@@ -9,6 +9,8 @@ var alarm = {
 		// 打开声音开关 
 		this.soundBtn = document.getElementById('sounds')
 		this.soundBtn.style.display = 'block'
+		speekCon = ''
+		// 初始化声音
 		var that = this
 		this.loadData()
 		this.timer = setInterval(function(){
@@ -68,6 +70,7 @@ var alarm = {
 			click:true
 		})
 		this._getSpeech(list)
+		// Observer.fire('play')
 	},
 	_getSpeech:function(item) {
 	      var mytxt=''
@@ -80,9 +83,9 @@ var alarm = {
 	desorty: function () {
 		//清除 定时器
 		clearInterval(this.timer)
-		endAudio ()
+		// endAudio ()
 		changeFlag = false
-		speekCon = ''
+		// speekCon = ''
 	}
 }
 function showMsg (infusionAlarmId) {
@@ -174,6 +177,6 @@ Observer.regist('play',function(){
 	if(!speakPlaying) {
 		return
 	}
-	android.speakInit()
+	// android.speakInit()
 	android.speak(speekCon)
 })

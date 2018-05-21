@@ -54,7 +54,7 @@ var alarm = {
 				              '<i class="bottom"></i>'+
 				          '</span>'+
 				        '</p>'+
-				        '<p class="temp-time">'+formatDate(list[i].bedNumber,'hh:mm:ss')+'</p>'+
+				        '<p class="temp-time">'+formatDate(list[i].recordTime,'hh:mm:ss')+'</p>'+
 				    '</div></li>'
 		}
 		this.alarmList.innerHTML =  html

@@ -9,6 +9,8 @@ var alarm = {
 		// 打开声音开关 
 		this.soundBtn = document.getElementById('sounds')
 		this.soundBtn.style.display = 'block'
+		// 初始化声音
+		speekCon = ''
 		var that = this
 		this.loadData()
 		this.timer = setInterval(function(){

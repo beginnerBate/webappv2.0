@@ -94,3 +94,12 @@ http://192.168.0.100:8888/webservice/infusionAlarms?status=0
 ```javascript
 1. infusionMonitors
 ```
+## v1.2 版本更新
+v1.2 新增功能
+1. 导航自动切换 5s切换一次
+2. 语音后台自动播放
+3. 新增 体温 大于37.5℃报警
+4. 语音 全局控制 
+## v2.0 去掉报警
+
+## wapV1.0 手机版
