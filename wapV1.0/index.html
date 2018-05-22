@@ -8,18 +8,41 @@
   <meta name="full-screen" content="yes">
   <meta name="browsermode" content="application">
   <meta name="x5-orientation" content="portrait"><meta name="x5-fullscreen" content="true"><meta name="x5-page-mode" content="app">
-  <title>智能医疗检测系统</title>
+	<title>智能医疗检测系统</title>
+	<!-- 智能医疗检测系统 手机版 -->
   <link rel="stylesheet" href="common/css/common.css">
   <link rel="stylesheet" href="common/bin/css/font-awesome.min.css"/>
   <link rel="stylesheet" href="common/css/home.css">
   <link rel="stylesheet" href="common/css/page.css">
   <link rel="stylesheet" href="common/css/set.css">
 </head>
-<!-- 智能医疗检测系统 手机版 -->
 <body class="home">
-	<!-- top导航 -->
+	<!-- 服务器设置 -->
+	<div id="box" class="box-wrapper ip-set">
+			<div class="box-content" id="boxCon">
+				<div class="box-header">
+					<i class="fa fa-cog"></i><span> 服务器设置</span>
+				</div>
+				<div class="form-wrapper">
+					<span id="tip"><i class="fa  fa-check-circle"></i> 设置成功</span>
+					<span id="error"></span>
+					
+					<div class="form-row">
+						<label class="ls5">IP：</label>
+						<input type="text" id="ip" value="" />
+					</div>
+					<div class="form-row ">
+						<label>端口：</label><input type="text" id="port" />
+					</div>
+					<div class="form-row">
+						<input type="button" id="setIp" class="btn" value="确定"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- 头部标题 -->
 	  <section class="top-header">
-				<h1 id="title">体温监测</h1>
+				<h1 id="title"></h1>
 		</section>
 	<!-- 底部导航 -->
   <section class="header wap">
@@ -37,16 +60,19 @@
 						<span class="fa img fa-cog"></span>
 						<span class="txt">系统设置</span>
 				</li>
-        <!-- <li><span id="updataIp"><i class="fa fa-cog"></i></span></li> -->
       </ul>
     </div>
 	</section>
-	<!-- 内容 -->
+	<!-- 页面内容 -->
   <section class="page">
     <!-- temp-page -->
     <div class="h-page active">
       <div class="page-wrapper" id="temp">
         <div class="content">
+					<!-- 下拉刷新更多 -->
+					<div id="top-tip" class="top-tip">
+							<span class="refreshTxt" id="temprefresh"></span>
+					</div>
           <ul class="item-list" id="tempList">
           </ul>
         </div>
@@ -54,106 +80,38 @@
     </div>
     <!-- trans-page -->
     <div class="h-page">
-    	<div class="page-row">
+    	<div class="page-row" id="transwrapper">
     		<!--输液监测列表-->
-	    	<div class="page-left">
-	    		<div id="transwrapper" class="trans-wrapper">
+	    		<div class="trans-wrapper">
+						<!-- 下拉刷新更多 -->
+						<div id="top-tip" class="top-tip">
+							<span class="refreshTxt" id="transrefresh"></span>
+						</div>
 	    			<ul id="transList" class="item-list">
 	    			</ul>
 	    		</div>
-	    	</div>
     	</div>
 		</div>
 		<!-- 系统设置 -->
 		<div class="h-page">
-			<div class="page-set">
-				<div class="page-set-content">
-					<ul>
-						<li id="ipset">
-							<div>
-								<span class="name">IP</span>
-								<span class="name-value">192.168.0.255</span>
-								<span class="fa fa-angle-right"></span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span class="name">端口</span>
-								<span class="name-value">8888</span>
-								<span class="fa fa-angle-right"></span>
-							</div>
-						</li>
-					</ul>
-					<ul>
-						<li>
-							<div>
-								<span class="name">语音报警</span>
-								<span class="name-value"></span>
-								<span class="on-off">
-									<span class="on-off-btn"></span>
-								</span>
-							</div>
-						</li>
-						<li>
-							<div>
-								<span class="name">语音报警</span>
-								<span class="name-value"></span>
-								<span class="on-off on">
-									<span class="on-off-btn"></span>
-								</span>
-							</div>
-						</li>
-					</ul>
+			<div class="page-set" id="setPage">
 				</div>
 			</div>
 		</div>
   </section>
-  <div id="box" class="box-wrapper ip-set">
-  	<div class="box-content" id="boxCon">
-  		<div class="box-header">
-  			<i class="fa fa-cog"></i><span> 服务器设置</span>
-  		</div>
-  		<div class="form-wrapper">
-  			<span id="tip"><i class="fa  fa-check-circle"></i> 设置成功</span>
-  			<span id="error"></span>
-  			
-				<div class="form-row">
-					<label class="ls5">IP：</label>
-					<input type="text" id="ip" value="" />
-				</div>
-				<div class="form-row ">
-					<label>端口：</label><input type="text" id="port" />
-				</div>
-				<div class="form-row">
-					<input type="button" id="setIp" class="btn" value="确定"/>
-				</div>
-  		</div>
-  	</div>
-  </div>
   <!--公共弹出框 start 体温记录 输液详情 -->
   <div class="child-page" id='commonBox'>
-		<div class="child-top">
-			<span id="back" class="back fa fa-angle-left"><span>02床</span></span>
-			<h1>体温历史记录</h1>
-		</div>
-  	<div class="box-content" id="pageCon">
   	</div>
   </div>
   <!--公共弹出框 end-->
-  <!--sounds -->
-    <!-- <p class="sounds" id="sounds">
-      <span><i class="fa fa-volume-off" id="soundsIcon"><i>×</i></i></span>
-      <span>
-        <i  onclick="openAudio()" id="volumeUp">开</i><i class="active" onclick="endAudio()" id="volumeOff">关</i>
-      </span>
-		</p> -->
-		<!-- alert -->
-		<span class="alert" id="alert"></span>
+		<span class="alert" id="alert">请输入IP</span>
+		<span class="s-tip" id="stip">设置成功</span>
+		<span class="s-loading" id="sloading">设置成功</span>
+		<div id="sure" class="sure-alert"></div>
 </body>
 
 <script src="common/bin/bscroll.min.js" charset="utf-8"></script>
 <script src="common/bin/axios.min.js" charset="utf-8"></script>
-<!-- <script src="common/bin/echarts.common.min.js"></script> -->
 <script src="common/js/config.js" charset="utf-8"></script>
 <script src="common/js/temp.js"></script>
 <script src="common/js/alarm.js"></script>

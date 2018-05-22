@@ -15,8 +15,6 @@ window.onload = function () {
 				myUrl = getItem('url',true)
 				document.getElementById('box').style.display = "none"
 				temp.init()
-				// 系统时间
-				systemTime.init()
 			}else{
 				document.getElementById('box').style.display ='block'
 			}
@@ -119,8 +117,11 @@ window.onload = function () {
     	}
     	router.curEle = e.args.toEle
 	})
-}
 
+	// loading
+	
+}
+var loading = document.getElementById('sloading')
 
 
     

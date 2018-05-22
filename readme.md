@@ -110,3 +110,8 @@ v1.2 新增功能
 ---
 1. 服务器设置页面修改
 2. 首页布局修改
+---
+相关问题
+1. 弹出层滚动条问题 overflow:hidden
+2. click 事件点击多次 会执行很多遍什么原因 很严重的问题  	tempReacrd =function(){return false}
+3. 清除loading 离开的时候

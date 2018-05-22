@@ -7,8 +7,7 @@
  -----------------------------
  存在localstorage里面
  * */
-var BASEURL = 'https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/'
-var TIMES = 50*1000
+var TIMES = 3*1000
 var myUrl = ''
 var speekCon = ''
 var speakPlaying = false
@@ -21,14 +20,16 @@ var Axios = axios.create({
 // 初始化 
 initData([
 	{name:'port', value:''},
-	{name:'ip', value:''}
+	{name:'ip', value:''},
+	{name:'sounds', value:'off'},
 ])
 // 
 var config = {
 	data:{
 		port:'', //端口号
 		ip:'',  // ip地址
-		name:'webservice/'
+		name:'webservice/',
+		sounds:'',
 	},
 	setUrl: function () {
 		this.data.port = getItem('port',true)
@@ -36,12 +37,25 @@ var config = {
 		var url = "http://" + this.data.ip + ":" + this.data.port + "/webservice/"
 		myUrl = url
 		setItem('url',url)
-		// console.log(url)
 	},
 	setServer:function (ipTxt,portTxt) {
 		setItem('ip',ipTxt)
 		setItem('port',portTxt)
 		this.setUrl()
+		return true
+	},
+	setIP:function(sIP){
+		setItem('ip',sIP)
+		this.setUrl()
+		return true
+	},
+	setPORT:function (sPORT) {
+		setItem('port',sPORT)
+		this.setUrl()
+		return true
+	},
+	setSounds:function(sounds){
+		setItem('sounds',sounds)
 		return true
 	}
 }
