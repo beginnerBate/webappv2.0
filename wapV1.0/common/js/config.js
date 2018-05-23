@@ -7,7 +7,7 @@
  -----------------------------
  存在localstorage里面
  * */
-var TIMES = 3*1000
+var TIMES = 2*1000
 var myUrl = ''
 var speekCon = ''
 var speakPlaying = false

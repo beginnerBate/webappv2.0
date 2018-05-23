@@ -8,12 +8,13 @@ window.onload = function () {
 	var home = {
 		init: function () {
 			// 如果flag == true 服务器已经设置 隐藏服务器设置页面 初始化页面
-			// document.getElementById('pageHeader').style.display = 'flex'
+			document.getElementById('topHeader').style.display = 'none'
 			var page = getItem('flag',true)   		
 			if (page) {
 				// 获取IP地址
 				myUrl = getItem('url',true)
 				document.getElementById('box').style.display = "none"
+				document.getElementById('topHeader').style.display = 'block'
 				temp.init()
 			}else{
 				document.getElementById('box').style.display ='block'
@@ -93,7 +94,9 @@ window.onload = function () {
     		trans.init()
     		break;    		
     		case 2:
-    		myset.init()
+				myset.init()
+				temp.desorty()
+				// trans.desorty()
     		break;    		
     	}
     })
@@ -103,16 +106,10 @@ window.onload = function () {
 		var index = e.args.curEle
     	switch (index) {
     		case 0:
-    		temp.desorty()
+				temp.desorty()
     		break;    		
     		case 1:
 				trans.desorty()
-    		break;    		
-    		case 2:
-    		// trans.desorty()
-    		break;    		
-    		case 3:
-    		// console.log('temp.init()')
     		break;
     	}
     	router.curEle = e.args.toEle

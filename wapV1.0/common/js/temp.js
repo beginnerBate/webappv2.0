@@ -5,14 +5,17 @@ var temp = {
 	tempList: document.getElementById('tempList'),
 	timer:"",
 	tempScroll:"",
+	listData:[],
 	init: function () {
 		//  1.设置标题
 		document.getElementById('title').innerText = '体温监测'
-		this.getData()
 		var that = this
-		this.timer = setInterval(function(){
+		this.getData().then(function(res){
+			that.timer = setInterval(function(){
 				that.getTimerData()
 		},TIMES)
+		})
+	
 		tempReacrd =  function(bedNumber) {
 			tempRecord.init(bedNumber)
 		}
@@ -23,7 +26,7 @@ var temp = {
 		// 加载之前
 		loading.style.display = 'block'
 		loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
-		axios.get(myUrl+'newestTemperatures',{
+		return axios.get(myUrl+'newestTemperatures',{
 			headers:{
 				inpatientAreaCode:'001'
 			}
@@ -31,16 +34,18 @@ var temp = {
 		.then(function(res){
 			var data = res.data
 			if (data.code == 200) {
-				that.list = data.data
+				that.listData = data.data
 				// dom 渲染
-				document.getElementById('temprefresh').innerHTML = '松开刷新数据'
-				that.dataRender(that.list)
+				that.dataRender(that.listData)
 				loading.style.display = 'none'
 				loading.innerHTML =''			
 			}
+			return Promise.resolve(true)
 		})
 	},
 	getTimerData:function() {
+		// 清除定时器
+		clearInterval(this.timer)
 		var that = this
 		//获取体温数据
 		axios.get(myUrl+'newestTemperatures',{
@@ -51,22 +56,34 @@ var temp = {
 		.then(function(res){
 			var data = res.data
 			if (data.code == 200) {
-				that.list = data.data
-				// dom 渲染
-				that.dataRender(that.list)		
+				// 如果数据没有变化 不会渲染页面
+				if (cmp(that.listData,data.data)) {
+					// 数据没有变化
+				}else {
+					// 数据有变化
+					that.listData = data.data
+					// dom 渲染
+				  that.dataRender(that.listData)
+				}
+        // 定时器
+				that.timer = setInterval(function(){
+					  that.getTimerData()
+			  },TIMES)		
 			}
 		})
 	},
 	dataRender: function (list) {
 		var html = ''
 		for (var i =0;i<list.length;i++) {
-			html += '<li onclick="tempReacrd(\''+list[i].bedNumber+'\')" value="'+list[i].bedNumber+'">'+
-              '<div class="m-temp-item">'+
-                '<p class="bed-num">'+list[i].bedNumber+'床</p>'
+			html += '<li onclick="tempReacrd(\''+list[i].bedNumber+'\')" value="'+list[i].bedNumber+'">'
             if (list[i].temperatureValue>=37.5) {
-                html += '<p class="temp-txt above">'+list[i].temperatureValue+'℃</p>'
+                html +='<div class="m-temp-item danger">'+
+								'<p class="bed-num">'+list[i].bedNumber+'床</p>'+
+								'<p class="temp-txt">'+list[i].temperatureValue+'℃</p>'
             }else{
-            	html += '<p class="temp-txt">'+list[i].temperatureValue+'℃</p>'
+            	html +='<div class="m-temp-item">'+
+							'<p class="bed-num">'+list[i].bedNumber+'床</p>'+
+							'<p class="temp-txt">'+list[i].temperatureValue+'℃</p>'
             }
 						html +='<p class="temp-time">'+formatDate(list[i].recordTime,'hh:mm:ss')+'</p>'+
 						'<p><span class="fa fa-angle-right go-next"></span></p>'
@@ -76,27 +93,15 @@ var temp = {
 		this.tempList.innerHTML =  html
 		var wrapper = document.getElementById('temp')
 		this.tempList.style.minHeight = wrapper.offsetHeight +1 +'px';
-		this.tempScroll = new BScroll(wrapper,{
-			probeType:3,
-			pullDownRefresh: {
-				threshold: 50,
-				stop: 0
-			},
-			pullUpLoad:{
-				threshold:-80
-			},
-			mouseWheel: {    // pc端同样能滑动
-				speed: 20,
-				invert: false
-			},
-			useTransition:false,  // 防止iphone微信滑动卡顿
-			click:true
-		})
-		// 下拉刷新数据
-		var that = this
-		this.tempScroll.on('pullingDown',function(){
-			that.getData()
-		})
+		if (!this.tempScroll){
+			this.tempScroll = new BScroll(wrapper,{
+				useTransition:false,  // 防止iphone微信滑动卡顿
+				click:true
+			})
+		}else{
+			this.tempScroll.refresh()
+		}
+
 	},
 	desorty: function () {
 		//清除 定时器

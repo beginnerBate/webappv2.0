@@ -5,22 +5,6 @@ var alarm = {
 	listData:[],
 	Txt:'',
 	timer:'',
-	init: function () {
-		// 打开声音开关 
-		this.soundBtn = document.getElementById('sounds')
-		this.soundBtn.style.display = 'block'
-		var that = this
-		this.loadData()
-		this.timer = setInterval(function(){
-		    that.loadData()
-		},TIMES)
-		// 监听
-		Observer.regist('alarmDel',function(e){
-			var commonBox = document.getElementById('commonBox')
-			commonBox.style.display = 'block'
-			alarmAlert.init(e.args.infusionAlarmId)
-		})
-	},
 	loadData: function () {
 		var that = this
 		axios.get(myUrl+'newestInfusionAlarms?status=0',{

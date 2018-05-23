@@ -213,18 +213,25 @@ var systemTime = {
 	init: function (){
 		var that = this
 		this.sysTime = document.getElementById('sysTime')
-		this.myTimer = setInterval(function(){
-        that.loadData().then(function (data) {
-					that.sysTime.innerHTML = data.sysDateTime
-				})
-		},1000)
+		this.loadData()
+		// this.myTimer = setInterval(function(){
+    //     that.loadData().then(function (data) {
+		// 			that.sysTime.innerHTML = data.sysDateTime
+		// 		})
+		// },1000)
 	},
 	loadData: function () {
+		clearInterval(this.myTimer)
 		var that = this
 		var url = myUrl + 'common/sysDateTime'
 		return axios.get(url).then(function(res){
 			var data = res.data
 			that.startTime = data.sysDateTime
+			that.myTimer = setInterval(function(){
+        that.loadData().then(function (data) {
+					that.sysTime.innerHTML = data.sysDateTime
+				})
+		},1000)
 			return Promise.resolve(data)
 		})
 	}

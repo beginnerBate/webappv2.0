@@ -1,7 +1,12 @@
 var trans = {
-	listData:{},
+	listData:[],
+	listData01:[],
+	listData02:[],
 	soundBtn: '',
 	timer:"",
+	transScroll:"",
+	transScroll10:"",
+	transScroll20:"",
 	init:function () {
 			
 		// 打开声音开关 
@@ -12,9 +17,7 @@ var trans = {
 		this.loadData()
 
 		var that = this
-		this.timer = setInterval(function(){
-			that.loadData()
-	  },TIMES)
+
 		// 监听
 		Observer.regist('transDel',function(e){
 			var commonBox = document.getElementById('commonBox')
@@ -34,12 +37,13 @@ var trans = {
 		var mydate = new Date(systemTime.startTime)
 		var date = new Date(mydate.setMinutes(mydate.getMinutes() - 10))
 		var startTime10 = formatDate(date, 'yyyy-MM-d hh:mm:ss')
-		console.log(startTime10)
 		// return Promise.resolve(startTime10)
 		return Promise.resolve('2018-05-21 14:32:16')
 	},
 	loadData: function () {
+		clearInterval(this.timer)
 		var that = this
+		var ajaxA,ajaxB,ajaxC
 		//  10mL data 获取
 //		var data = {alarmValue1:10,alarmValue2:20,startTime: data,orderBy:'surplus',status:0}
 			this.getstartTime().then(function(data){
@@ -49,10 +53,16 @@ var trans = {
 				Axios.get(url).then(function(res){
 					var data = res.data
 					if (data.code ==200) {
-						that.renderHtml20(data.data)
+						// dom渲染 如果数据变化
+						if(!cmp(that.listData01,data.data)){
+							that.renderHtml20(data.data)
+							that.listData01 = data.data
+						}
+						
 					}else {
 						that.renderHtml20([])
 					}
+					ajaxA = Promise.resolve(true)
 				})
 			})
 			this.getstartTime().then(function(data){
@@ -68,13 +78,14 @@ var trans = {
 						}else {
 							changeFlag = true
 							Observer.fire('play')
+							that.listData = data.data
+							that.renderHtml10(data.data)
 						}
-						that.listData = data.data
-						that.renderHtml10(data.data)
 					}else {
 						that.listData = []
 						that.renderHtml10(that.listData)
 					}
+					ajaxB = Promise.resolve(true)
 				})
 			})
 		//  20mL data 获取
@@ -86,11 +97,20 @@ var trans = {
 			Axios.get(url).then(function(res){
 				var data = res.data
 				if (data.code ==200) {
-					that.renderHtml(data.data)
+					if(!cmp(that.listData02,data.data)){
+						that.renderHtml(data.data)
+						that.listData02 = data.data
+					}	
 				}else {
 					that.renderHtml([])
 				}
+				ajaxC = Promise.resolve(true)
 			})
+		})
+		Promise.all([ajaxA,ajaxB,ajaxC]).then(function(){
+			that.timer = setInterval(function(){
+				that.loadData()
+			},TIMES)
 		})
 	},
 	renderHtml: function (list) {
@@ -119,7 +139,12 @@ var trans = {
 				var transList = document.getElementById('transList')
 				transList.innerHTML = html
 				var transWrapper = document.getElementById('transwrapper')
-				var transScroll = new BScroll(transWrapper,{click:true})
+				if (!this.transScroll){
+					this.transScroll = new BScroll(transWrapper,{click:true})
+				}else{
+					this.transScroll.refresh()
+				}
+				
 	},
 	renderHtml10: function (list) {
 			var html =''
@@ -133,7 +158,11 @@ var trans = {
 			var transList = document.getElementById('transList10')
 			transList.innerHTML = html
 			var transWrapper10 = document.getElementById('trans10')
-			var transScroll10 = new BScroll(transWrapper10)
+			if (!this.transScroll10){
+				this.transScroll10 = new BScroll(transWrapper10)
+			}else{
+				this.transScroll10.refresh()
+			}
 			this._getSpeech(list)
 	},
 	renderHtml20: function (list) {
@@ -148,7 +177,11 @@ var trans = {
 			var transList = document.getElementById('transList20')
 			transList.innerHTML = html
 			var transWrapper20 = document.getElementById('trans20')
-			var transScroll20 = new BScroll(transWrapper20)
+			if (!this.transScroll20){
+				this.transScroll20 = new  BScroll(transWrapper20)
+			}else{
+				this.transScroll20.refresh()
+			}
 	},
 	_getSpeech:function(item) {
 		var mytxt=''

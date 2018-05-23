@@ -3,16 +3,16 @@ var trans = {
 	sounds: '',
 	timer:"",
 	transScroll:"",
+	listData01:[],
 	init:function () {
 		//  1.设置标题
 		document.getElementById('title').innerText = '输液监测'
 		//  2.获取数据
 		this.listData = []
-		this.loadData()
 		var that = this
-		this.timer = setInterval(function(){
+		this.loadData().then(function(res){
 			that.loadTimerData()
-	  },TIMES)
+		})
 		// 3.监听
 		Observer.regist('transDel',function(e){
 			var commonBox = document.getElementById('commonBox')
@@ -42,7 +42,8 @@ var trans = {
 	},
 	loadData: function () {
 		var that = this
-			this.getstartTime().then(function(data){
+		var ajaxA,ajaxB
+			that.getstartTime().then(function(data){
 				var mydate ={alarmValue1:10,startTime: data,orderBy:'surplus',status:0}
 				var url = myUrl + 'infusionMonitors' 
 				url += (url.indexOf('?') < 0 ? '?' : '&') + param(mydate)
@@ -57,6 +58,7 @@ var trans = {
 						that.listData = []
 						that._getSpeech(that.listData)
 					}
+					ajaxA = Promise.resolve(true)
 				})
 			})
 		//  20mL data 获取
@@ -64,6 +66,7 @@ var trans = {
 		// 加载之前
 		loading.style.display = 'block'
 		loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
+		
 		this.getstartTime().then(function(data){
 			var mydate = {startTime:data,status:0}
 			var url = myUrl + 'infusionMonitors' 
@@ -72,15 +75,21 @@ var trans = {
 				var data = res.data
 				if (data.code ==200) {					
 					that.renderHtml(data.data)
-					document.getElementById('transrefresh').innerHTML = '松开刷新数据'
 					loading.style.display = 'none'
 					loading.innerHTML =''
 				}
+				ajaxB = Promise.resolve(true)
 			})
+		})
+		return Promise.all([ajaxA,ajaxB]).then(function(res){
+			return Promise.resolve(true)
 		})
 	},
 	loadTimerData:function(){
+		// 清除定时器
+		clearInterval(this.timer)
 		var that = this
+		var ajaxA,ajaxB
 		this.getstartTime().then(function(data){
 			var mydate ={alarmValue1:10,startTime: data,orderBy:'surplus',status:0}
 			var url = myUrl + 'infusionMonitors' 
@@ -101,6 +110,7 @@ var trans = {
 					that.listData = []
 					that._getSpeech(that.listData)
 				}
+				ajaxA = Promise.resolve(true)
 			})
 		})
 		//  20mL data 获取
@@ -113,10 +123,19 @@ var trans = {
 			Axios.get(url).then(function(res){
 				var data = res.data
 				if (data.code ==200) {
-					document.getElementById('transrefresh').innerHTML = '松开刷新数据'
-					that.renderHtml(data.data)
+					// 如果数据没有变化 不渲染html
+					if (!cmp(that.listData01,data.data)) {
+						that.renderHtml(data.data)
+						that.listData01 = data.data
+					}
 				}
+				ajaxB = Promise.resolve(true)
 			})
+		})
+		Promise.all([ajaxA,ajaxB]).then(function(res){
+			that.timer = setInterval(function(){
+				that.loadTimerData()
+			},TIMES)
 		})
 	},
 	renderHtml: function (list) {
@@ -148,28 +167,15 @@ var trans = {
 				transList.style.minHeight = transWrapper.offsetHeight +1 +'px';
 				transList.innerHTML = html
 				//  设置 content的height = transwrapper+1px
-				this.transScroll = new BScroll(transWrapper,{
-					probeType:3,
-					pullDownRefresh: {
-						threshold: 50,
-						stop: 0
-					},
-					pullUpLoad:{
-						threshold:-80
-					},
-					mouseWheel: {    // pc端同样能滑动
-						speed: 20,
-						invert: false
-					},
-					useTransition:false,  // 防止iphone微信滑动卡顿
-					click:true
-				})
-				// 下拉刷新数据
-				var that = this
-				this.transScroll.on('pullingDown',function(){
-					console.log('下拉')
-					that.loadData()
-				})
+				if (!this.transScroll) {
+					this.transScroll = new BScroll(transWrapper,{
+						useTransition:false,  // 防止iphone微信滑动卡顿
+						click:true
+					})
+				}else {
+					this.transScroll.refresh()
+				}
+
 	},
 	_getSpeech:function(item) {
 		var mytxt=''

@@ -29,6 +29,9 @@
     border-radius: 6px;
     padding: 0.5em;
 }
+.m-temp-item.danger{
+    background: #F56C6C;
+}
 /*ip-set-page*/
 .ip-set{
 	background: #fff;
@@ -108,7 +111,7 @@
     
 }
 .temp-txt{
-    color: #007dff;
+    color: #fff;
     text-align: center;
     font-size: 21px;
     padding: 0.8em 1em;
