@@ -1,4 +1,5 @@
-
+var tempReacrd = function(){return false}		
+// 发布一个打开详情的事件
 var temp = {
 	tempList: document.getElementById('tempList'),
 	timer:"",
@@ -10,14 +11,13 @@ var temp = {
 				that.getData()
 				// console.log('timer',200)
 		},TIMES)
-		Observer.regist('tempRecord',function(e){
-			// console.log("打开"+e.args.bedNumber+"床的详细信息")
+		tempReacrd =  function(bedNumber) {
 			var commonBox = document.getElementById('commonBox')
 			commonBox.style.display = 'block'
 			// 关闭 体温刷新
 			that.desorty()
-			tempRecord.init(e.args.bedNumber)
-		})
+			tempRecord.init(bedNumber)
+		}
 	},
 	getData:function() {
 		var that = this
@@ -66,12 +66,13 @@ var temp = {
 	desorty: function () {
 		//清除 定时器
 		clearInterval(this.timer)
+		tempReacrd =function(){return false}
 	}
 }
 // 发布一个打开详情的事件
-function tempReacrd(bedNumber) {
-	Observer.fire('tempRecord',{'bedNumber':bedNumber})
-}
+// function tempReacrd(bedNumber) {
+// 	Observer.fire('tempRecord',{'bedNumber':bedNumber})
+// }
 
 // 定义一个 tempRecord对象
 var tempRecord = {
