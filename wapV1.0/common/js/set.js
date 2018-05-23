@@ -73,14 +73,12 @@ var myset = {
       that.childPage.innerHTML = "<div class='child-top'>"+
                                     "<span  class='cancle' onclick='IPcancle()'><span>取消</span></span>"+
                                     "<h1>修改IP</h1>"+
+                                    '<input type="button" id="setIp" class="btn s-btn" value="完成" onclick="subIP()" />'+
                                  "</div>"+
                                  "<div class='box-content' id='pageCon'>"+
                                  '<div class="form-row ">'+
                                    '<input type="text" class="s-input" id="sip" value="'+IP+'" />'+
                                  '</div>'+
-                                 '<div class="form-row">'+
-                                 '<input type="button" id="setIp" class="btn s-btn" value="完 成" onclick="subIP()" />'+
-                               '</div>'+
                                  "</div>"
       //  3.显示页面
       that.childPage.style.right = 0;
@@ -97,14 +95,12 @@ var myset = {
       that.childPage.innerHTML = "<div class='child-top'>"+
                                     "<span  class='cancle' onclick='IPcancle()'><span>取消</span></span>"+
                                     "<h1>修改端口</h1>"+
+                                    '<input type="button"  class="btn s-btn" value="完成" onclick="subPORT()" />'+
                                  "</div>"+
                                  "<div class='box-content' id='pageCon'>"+
                                  '<div class="form-row ">'+
                                    '<input type="text" class="s-input" id="sport" value="'+PORT+'" />'+
                                  '</div>'+
-                                 '<div class="form-row">'+
-                                 '<input type="button"  class="btn s-btn" value="完 成" onclick="subPORT()" />'+
-                               '</div>'+
                                  "</div>"
       //  3.显示页面
       that.childPage.style.right = 0;

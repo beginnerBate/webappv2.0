@@ -15,15 +15,21 @@
 }
 .page-set-content>ul>li>div{
   padding: 14px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 .page-set-content>ul>li>div>.name{
   color:#000;
 }
 .page-set-content>ul>li>div>.name-value{
   color:#888888;
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   text-align: right;
 }
 .page-set-content>ul>li>div>.fa{
@@ -42,11 +48,13 @@
   width: 51px;
   height: 32px;
   border-radius: 50px;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border:2px solid #e5e5e5;
   background: #fff;
   position: relative;
   margin-right: 13px;
+  -webkit-transition: all 1s ease;
   transition: all 1s ease;
 }
 .on-off-btn{
@@ -58,7 +66,9 @@
   height: 26px;
   background: #fff;
   border-radius: 50%;
-  box-shadow: 1px 1px 4px #d6d6d6;
+  -webkit-box-shadow: 1px 1px 4px #d6d6d6;
+          box-shadow: 1px 1px 4px #d6d6d6;
+  -webkit-transition: all 2s ease;
   transition: all 2s ease;
 }
 .page-set-content>ul>li>div>.on-off.on{
@@ -68,15 +78,17 @@
 .page-set-content>ul>li>div>.on-off.on>.on-off-btn{
   right:2px;
   left: auto;
-  box-shadow:-2px -1px 4px #00b91f
+  -webkit-box-shadow:-2px -1px 4px #00b91f;
+          box-shadow:-2px -1px 4px #00b91f
 }
 .cancle{
   position: absolute;
   top:50%;
   left:0;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   padding: 0 13px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .alert{
   position: fixed;
@@ -85,11 +97,16 @@
   color:#fafafa;
   top:50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
   display:none;
   border-radius: 8px;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-size: 12px;
   padding: 12px 24px;
 }
@@ -100,11 +117,16 @@
   color:#00b91f;
   top:50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
   display:none;
   border-radius: 8px;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-size: 12px;
   padding: 12px 24px;
   border:1px solid #00b91f;
@@ -116,22 +138,35 @@
   color:#f1f1f1;
   top:50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
   display:none;
   border-radius: 8px;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-size: 12px;
   padding:20px;
 }
 .form-row>.s-input{
   border-radius: 0;
   border:0;
-  border-bottom: 1px solid #9d9d9d;
+  border-bottom: 1px solid #dedede;
 }
 .btn.s-btn{
   background: #2782d7;
   max-width: 90%;
+  border: 0;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-size: 14px;
+  outline: none;
 }
 .sure-alert{
   position: fixed;
@@ -140,21 +175,29 @@
   color:#f1f1f1;
   top:50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
   display:none;
   border-radius: 8px;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   font-size: 12px;
   padding-top: 15px;
   padding-left: 10px;
   padding-right: 10px;
-  box-shadow: 1px 1px 5px #666;
+  -webkit-box-shadow: 1px 1px 5px #666;
+          box-shadow: 1px 1px 5px #666;
   overflow: hidden;
 }
 .btn-wrapper{
   border-top:1px solid #d9d9d9;
   padding-top: 2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 .top-tip{
@@ -166,7 +209,8 @@
   color: #888888;
 }
 .bottom-tip{
-  transform: translate(-50%,50px);
+  -webkit-transform: translate(-50%,50px);
+          transform: translate(-50%,50px);
   position: fixed;
   /* top: -20px; */
   /* text-align: center; */
