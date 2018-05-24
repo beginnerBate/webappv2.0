@@ -12,10 +12,13 @@ var myUrl = ''
 var speekCon = ''
 var speakPlaying = false
 var speaking = false
+axios.defaults.timeout =  6000
+var CancelToken = axios.CancelToken;
+var cancel;
 var Axios = axios.create({
   headers:{
     inpatientAreaCode:'001'
-  }
+	}
 })
 // 初始化 
 initData([

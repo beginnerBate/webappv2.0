@@ -59,6 +59,8 @@ var trans = {
 						that._getSpeech(that.listData)
 					}
 					ajaxA = Promise.resolve(true)
+				}).catch(function(){
+					ajaxA = Promise.resolve(true)
 				})
 			})
 		//  20mL data 获取
@@ -66,7 +68,6 @@ var trans = {
 		// 加载之前
 		loading.style.display = 'block'
 		loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
-		
 		this.getstartTime().then(function(data){
 			var mydate = {startTime:data,status:0}
 			var url = myUrl + 'infusionMonitors' 
@@ -77,8 +78,18 @@ var trans = {
 					that.renderHtml(data.data)
 					loading.style.display = 'none'
 					loading.innerHTML =''
+					erroring.style.display = 'none'	
 				}
 				ajaxB = Promise.resolve(true)
+			}).catch(function(err){
+				if (router.curEle == 1) {
+					erroring.style.display = 'flex'
+					loading.style.display = 'none'
+					loading.innerHTML =''
+					ajaxB = Promise.resolve(true)
+				}else {
+					that.desorty()
+				}			
 			})
 		})
 		return Promise.all([ajaxA,ajaxB]).then(function(res){
@@ -111,6 +122,8 @@ var trans = {
 					that._getSpeech(that.listData)
 				}
 				ajaxA = Promise.resolve(true)
+			}).catch(function(){
+				ajaxA = Promise.resolve(true)
 			})
 		})
 		//  20mL data 获取
@@ -130,6 +143,12 @@ var trans = {
 					}
 				}
 				ajaxB = Promise.resolve(true)
+			}).catch(function(){
+				if (router.curEle == 0) {
+					ajaxB = Promise.resolve(true)
+				}else {
+					that.desorty()
+				}	
 			})
 		})
 		Promise.all([ajaxA,ajaxB]).then(function(res){
@@ -200,6 +219,7 @@ var trans = {
 		endAudio ()
 		changeFlag = false
 		speekCon = ''
+		erroring.style.display = 'none'
 	}
 }
 function showMsgTrans(infusionMonitorId){ 

@@ -3,6 +3,7 @@ var myset = {
   setPage:'',
   loading:"",
   init: function() {
+    erroring.style.display = 'none'
     // 设置标题
     document.getElementById('title').innerText = '系统设置'
     this.setPage = document.getElementById('setPage')

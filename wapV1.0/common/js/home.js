@@ -1,6 +1,6 @@
 // home.js
 // 导航和页面加载模块
-
+var router = {curEle:0,toEle:''}
 window.onload = function () {
 	//  设置ip和端口
 	var setIp = document.getElementById('setIp')
@@ -60,7 +60,7 @@ window.onload = function () {
 	// 初始化导航 curEle toEle
 	var btn = document.querySelectorAll('.nav>li')
 	var page = document.querySelectorAll('.page>.h-page')
-	var router = {curEle:0,toEle:''}
+
     Array.prototype.slice.call(btn).forEach(function(item,index){
 		btn[index].onclick = function () {
 			// 为item添加class
@@ -96,7 +96,6 @@ window.onload = function () {
     		case 2:
 				myset.init()
 				temp.desorty()
-				// trans.desorty()
     		break;    		
     	}
     })
@@ -119,7 +118,7 @@ window.onload = function () {
 	
 }
 var loading = document.getElementById('sloading')
-
+var erroring = document.getElementById('erroring')
 
     
 	

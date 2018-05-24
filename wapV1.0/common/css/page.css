@@ -377,3 +377,24 @@
     /* text-align: center; */
     left: 50%;
 }
+.error-page{
+    position: fixed;
+    top:50px;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    display: none;
+}
+.error-page>p{
+    color: #888888;
+    font-size: 14px;
+}
+.error-page>p>.fa{
+    font-size: 18px;
+    padding-right: 5px;
+    color: #e6a23c;
+}

@@ -26,11 +26,7 @@ var temp = {
 		// 加载之前
 		loading.style.display = 'block'
 		loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
-		return axios.get(myUrl+'newestTemperatures',{
-			headers:{
-				inpatientAreaCode:'001'
-			}
-		})
+		return Axios.get(myUrl+'newestTemperatures')
 		.then(function(res){
 			var data = res.data
 			if (data.code == 200) {
@@ -38,9 +34,19 @@ var temp = {
 				// dom 渲染
 				that.dataRender(that.listData)
 				loading.style.display = 'none'
-				loading.innerHTML =''			
+				loading.innerHTML =''
+				erroring.style.display = 'none'			
 			}
 			return Promise.resolve(true)
+		}).catch(function(err){
+			if (router.curEle == 0) {
+				erroring.style.display = 'flex'
+				loading.style.display = 'none'
+				loading.innerHTML =''
+				return Promise.resolve(true)
+			}else {
+				that.desorty()
+			}			
 		})
 	},
 	getTimerData:function() {
@@ -48,11 +54,7 @@ var temp = {
 		clearInterval(this.timer)
 		var that = this
 		//获取体温数据
-		axios.get(myUrl+'newestTemperatures',{
-			headers:{
-				inpatientAreaCode:'001'
-			}
-		})
+		Axios.get(myUrl+'newestTemperatures')
 		.then(function(res){
 			var data = res.data
 			if (data.code == 200) {
@@ -70,6 +72,12 @@ var temp = {
 					  that.getTimerData()
 			  },TIMES)		
 			}
+		}).catch(function(){
+			if (router.curEle == 0) {
+				that.getTimerData()
+			}else {
+				that.desorty()
+			}	
 		})
 	},
 	dataRender: function (list) {
@@ -109,6 +117,7 @@ var temp = {
 		tempReacrd =function(){return false}
 		loading.style.display = 'none'
 		loading.innerHTML =''
+		erroring.style.display = 'none'			
 	}
 }
 
@@ -190,6 +199,11 @@ var tempRecord = {
 				that.renderHtml(that.tempList)				
 				loading.style.display = 'none'
 				loading.innerHTML =''	
+				erroring.style.display = 'none'
+		}).catch(function(err){
+			loading.style.display = 'none'
+			loading.innerHTML =''	
+			erroring.style.display = 'flex'
 		})
     },
     renderHtml:function(list){
@@ -249,6 +263,7 @@ var tempRecord = {
 			this.pageChild.style.right = '-100%'
 			loading.style.display = 'none'
 			loading.innerHTML =''
+			erroring.style.display = 'none'
 			temp.init()
     }
  }
