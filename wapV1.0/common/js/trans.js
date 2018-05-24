@@ -41,9 +41,14 @@ var trans = {
 		return Promise.resolve('2018-4-10 12:00:00')
 	},
 	loadData: function () {
+				// 加载之前
+		loading.style.display = 'block'
+		loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
+		erroring.style.display = 'none'
 		var that = this
 		var ajaxA,ajaxB
 			that.getstartTime().then(function(data){
+				
 				var mydate ={alarmValue1:10,startTime: data,orderBy:'surplus',status:0}
 				var url = myUrl + 'infusionMonitors' 
 				url += (url.indexOf('?') < 0 ? '?' : '&') + param(mydate)
@@ -65,9 +70,6 @@ var trans = {
 			})
 		//  20mL data 获取
 		//  10ml and 20mL and> 20mL 	
-		// 加载之前
-		loading.style.display = 'block'
-		loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
 		this.getstartTime().then(function(data){
 			var mydate = {startTime:data,status:0}
 			var url = myUrl + 'infusionMonitors' 
@@ -87,9 +89,11 @@ var trans = {
 					loading.style.display = 'none'
 					loading.innerHTML =''
 					ajaxB = Promise.resolve(true)
-				}else {
-					that.desorty()
-				}			
+				}	else{
+					loading.style.display = 'none'
+					loading.innerHTML =''
+					erroring.style.display = 'none'
+				}
 			})
 		})
 		return Promise.all([ajaxA,ajaxB]).then(function(res){
@@ -142,13 +146,17 @@ var trans = {
 						that.listData01 = data.data
 					}
 				}
+				erroring.style.display = 'none'
 				ajaxB = Promise.resolve(true)
 			}).catch(function(){
-				if (router.curEle == 0) {
+				if (router.curEle == 1) {
+					erroring.style.display = 'flex'
 					ajaxB = Promise.resolve(true)
-				}else {
-					that.desorty()
-				}	
+				}	else{
+					loading.style.display = 'none'
+					loading.innerHTML =''
+					erroring.style.display = 'none'
+				}
 			})
 		})
 		Promise.all([ajaxA,ajaxB]).then(function(res){

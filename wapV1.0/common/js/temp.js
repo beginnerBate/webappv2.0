@@ -26,6 +26,7 @@ var temp = {
 		// 加载之前
 		loading.style.display = 'block'
 		loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
+		erroring.style.display = 'none'
 		return Axios.get(myUrl+'newestTemperatures')
 		.then(function(res){
 			var data = res.data
@@ -44,9 +45,12 @@ var temp = {
 				loading.style.display = 'none'
 				loading.innerHTML =''
 				return Promise.resolve(true)
-			}else {
-				that.desorty()
-			}			
+			}else{
+				loading.style.display = 'none'
+				erroring.style.display = 'none'
+				loading.innerHTML =''
+				clearInterval(that.timer)
+			}		
 		})
 	},
 	getTimerData:function() {
@@ -67,6 +71,7 @@ var temp = {
 					// dom 渲染
 				  that.dataRender(that.listData)
 				}
+				erroring.style.display = 'none'
         // 定时器
 				that.timer = setInterval(function(){
 					  that.getTimerData()
@@ -74,10 +79,12 @@ var temp = {
 			}
 		}).catch(function(){
 			if (router.curEle == 0) {
+				erroring.style.display = 'flex'
 				that.getTimerData()
-			}else {
-				that.desorty()
-			}	
+			}	else{
+				erroring.style.display = 'none'
+				clearInterval(that.timer)
+			}
 		})
 	},
 	dataRender: function (list) {
