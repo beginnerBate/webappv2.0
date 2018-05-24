@@ -305,7 +305,7 @@
     border-bottom: 1px solid #efefef;
 }
 .m-trans-item p:not(:first-child){
-    color: #004184;
+    color:#fff;
 }
 .m-trans-item.warning{
     background: #E6A23C;

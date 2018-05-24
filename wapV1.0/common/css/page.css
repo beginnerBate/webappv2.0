@@ -30,10 +30,10 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    background: #20c997;
+    background: #a2d489;
 }
 .m-temp-item.danger{
-    background: #dc3545;
+    background: #ea5161;
 }
 /*ip-set-page*/
 .ip-set{
@@ -281,7 +281,7 @@
     display: flex;
     color: #ffffff;
     padding: 12px;
-    background: #20c997;
+    background: #a2d489;
     -webkit-box-shadow: 0 0 18px 0 rgba(57,141,238,0.12);
             box-shadow: 0 0 18px 0 rgba(57,141,238,0.12);	
 }
@@ -335,84 +335,18 @@
     color: #ffffff;
 }
 .m-trans-item.warning{
-    background: #ffc107;
+    background: #f9cd4a;
 }
 .m-trans-item.warning p{
     color:#ffffff;
 } 
 .m-trans-item.danger{
-    background: #dc3545;
+    background: #ea5161;
 }
 .m-trans-item.danger p{
     color: #ffffff;
 }
-.page-right{
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 280px;
-            flex: 0 0 280px;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-orient: vertical;
-            -webkit-box-direction: normal;
-                -ms-flex-direction: column;
-                    flex-direction: column;
-            padding-top: 12px;
-}
 
-.m-trans-alarm-warning{
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 38vh;
-            flex: 0 0 38vh;
-}
-.m-trans-alarm-warning h1{
-    background: #E6A23C;
-    color: #ffffff;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-.m-trans-alarm-warning li{
-    color:#E6A23C;
-}
-.m-trans-alarm-wrapper{
-    height: calc(38vh - 40px);
-    border-left: 1px solid #d4d4d4;
-    border-right: 1px solid #d4d4d4;
-    border-bottom: 1px solid #d4d4d4;
-    overflow: hidden;
-}
-.m-trans-alarm-wrapper ul li {
-    border-bottom: 1px solid #d4d4d4;
-    padding: 12px 16px;
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-pack: distribute;
-        justify-content: space-around;
-}
-.m-trans-alarm-danger{
-    -webkit-box-flex: 0;
-        -ms-flex: 0 0 38vh;
-            flex: 0 0 38vh;
-    margin-top: 20px;
-}
-.m-trans-alarm-danger h1{
-    background: #f56c6c;
-    color: #ffffff;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-.m-trans-alarm-danger li{
-    color: #f56c6c;
-}
  /* trans-list-show  */
  .trans-list-show>li{
     padding:8px 12px;
