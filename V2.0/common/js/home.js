@@ -1,6 +1,6 @@
 // home.js
 // 导航和页面加载模块
-
+var router = {curEle:0,toEle:''}
 window.onload = function () {
 	//  设置ip和端口
 	var setIp = document.getElementById('setIp')
@@ -61,7 +61,7 @@ window.onload = function () {
 	// 初始化导航 curEle toEle
 	var btn = document.querySelectorAll('.nav>li')
 	var page = document.querySelectorAll('.page>.h-page')
-	var router = {curEle:0,toEle:''}
+	
     Array.prototype.slice.call(btn).forEach(function(item,index){
 		btn[index].onclick = function () {
 			// 为item添加class
@@ -88,31 +88,36 @@ window.onload = function () {
     Observer.regist('pageLoad',function(e){
     	var index = e.args.toEle
     	switch (index) {
-    		case 0:
-    		temp.init()
+				case 0:
+				
+				temp.init()
+				trans.desorty()
     		break;    		
-    		case 1:
-    		trans.init()
+				case 1:
+				trans.init()
+				temp.desorty()
     		break;    		
     		case 2:
-    		drawBoard.init()
+				drawBoard.init()
+				temp.desorty()
+				trans.desorty()
     		break;    		
     	}
     })
     
     // 订阅事件 pageclear 页面销毁 定时器清除 语音清除事件
-	Observer.regist('pageClear',function(e){
-		var index = e.args.curEle
-    	switch (index) {
-    		case 0:
-    		temp.desorty()
-    		break;    		
-    		case 1:
-    		trans.desorty()
-    		break;    		
-    	}
-    	router.curEle = e.args.toEle
-	})
+	// Observer.regist('pageClear',function(e){
+	// 	var index = e.args.curEle
+  //   	switch (index) {
+  //   		case 0:
+  //   		temp.desorty()
+  //   		break;    		
+  //   		case 1:
+  //   		trans.desorty()
+  //   		break;    		
+  //   	}
+  //   	router.curEle = e.args.toEle
+	// })
 	//  修改IP和端口
 	updataIp.init()
 }
@@ -162,14 +167,14 @@ var updataIp = {
 	}
 }
 
-        //  取消修改IP 和 PORT
-        function cancle () {
-        	updataIp.box.style.display = 'none'
-        }
+//  取消修改IP 和 PORT
+function cancle () {
+	updataIp.box.style.display = 'none'
+}
         
-        //  确定修改IP和PORT
-        function subIP () {
-	        var ipTxt = document.getElementById('ip').value
+//  确定修改IP和PORT
+function subIP () {
+	    var ipTxt = document.getElementById('ip').value
 			var portTxt = document.getElementById('port').value
 			var ip = document.getElementById('ip')
 			var port = document.getElementById('port')
@@ -201,7 +206,11 @@ var updataIp = {
 					document.getElementById('box').style.display = 'none'
 					tip.style.display = 'none'
 				},500)
-				home.init()
+				if (router.toEle == 0) {
+					temp.init()
+				}else if (router.toEle == 1){
+					trans.init()
+				}
 			}
 				}
 	
@@ -233,6 +242,8 @@ var systemTime = {
 				})
 		},1000)
 			return Promise.resolve(data)
+		}).catch(function(){
+        that.loadData()
 		})
 	}
 }

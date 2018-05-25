@@ -40,16 +40,17 @@ var temp = {
 			}
 			return Promise.resolve(true)
 		}).catch(function(err){
-			if (router.curEle == 0) {
+			loading.style.display = 'none'
+			loading.innerHTML =''
+			if (router.toEle == 0) {
 				erroring.style.display = 'flex'
-				loading.style.display = 'none'
-				loading.innerHTML =''
+				that.listData =[]
+				that.dataRender(that.listData)
 				return Promise.resolve(true)
 			}else{
-				loading.style.display = 'none'
 				erroring.style.display = 'none'
-				loading.innerHTML =''
 				clearInterval(that.timer)
+				return false			
 			}		
 		})
 	},
@@ -63,13 +64,11 @@ var temp = {
 			var data = res.data
 			if (data.code == 200) {
 				// 如果数据没有变化 不会渲染页面
-				if (cmp(that.listData,data.data)) {
-					// 数据没有变化
-				}else {
-					// 数据有变化
-					that.listData = data.data
-					// dom 渲染
-				  that.dataRender(that.listData)
+				if (!cmp(that.listData,data.data)) {
+						// 数据有变化
+						that.listData = data.data
+						// dom 渲染
+						that.dataRender(that.listData)
 				}
 				erroring.style.display = 'none'
         // 定时器
@@ -78,12 +77,16 @@ var temp = {
 			  },TIMES)		
 			}
 		}).catch(function(){
-			if (router.curEle == 0) {
+			if (router.toEle === 0) {
 				erroring.style.display = 'flex'
+				that.listData =[]
+				that.dataRender(that.listData)
 				that.getTimerData()
+				return false
 			}	else{
 				erroring.style.display = 'none'
 				clearInterval(that.timer)
+				return false
 			}
 		})
 	},

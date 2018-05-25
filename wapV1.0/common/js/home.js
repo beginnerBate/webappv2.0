@@ -74,7 +74,6 @@ window.onload = function () {
 			     })
 			page[index].classList.add('active')
 			router.toEle=index
-			// console.log(router)
 			// 注册事件 页面切换
 			Observer.fire('pageLoad', router)
 			// 注册事件 页面销毁
@@ -87,32 +86,38 @@ window.onload = function () {
     Observer.regist('pageLoad',function(e){
     	var index = e.args.toEle
     	switch (index) {
-    		case 0:
-    		temp.init()
+				case 0:
+				temp.init()
+				trans.desorty()
     		break;    		
-    		case 1:
-    		trans.init()
+				case 1:
+				temp.desorty()
+				trans.init()
     		break;    		
-    		case 2:
+				case 2:
 				myset.init()
 				temp.desorty()
+				trans.desorty()
+				
     		break;    		
     	}
     })
     
     // 订阅事件 pageclear 页面销毁 定时器清除 语音清除事件
-	Observer.regist('pageClear',function(e){
-		var index = e.args.curEle
-    	switch (index) {
-    		case 0:
-				temp.desorty()
-    		break;    		
-    		case 1:
-				trans.desorty()
-    		break;
-    	}
-    	router.curEle = e.args.toEle
-	})
+	// Observer.regist('pageClear',function(e){
+	// 	var index = e.args.curEle
+  //   	switch (index) {
+  //   		case 0:
+	// 			temp.desorty()
+  //   		break;    		
+  //   		case 1:
+	// 			trans.desorty()
+  //   		break;
+	// 		}
+	// 		// console.log('pageClear',router)
+	// 		router.curEle = e.args.toEle
+			
+	// })
 
 	// loading
 	

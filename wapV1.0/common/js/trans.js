@@ -8,7 +8,13 @@ var trans = {
 		//  1.设置标题
 		document.getElementById('title').innerText = '输液监测'
 		//  2.获取数据
+		// 加载之前
+		loading.style.display = 'block'
+		loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
+		erroring.style.display = 'none'
+		// alert(loading)
 		this.listData = []
+		this.listData01 = []
 		var that = this
 		this.loadData().then(function(res){
 			that.loadTimerData()
@@ -41,14 +47,9 @@ var trans = {
 		return Promise.resolve('2018-4-10 12:00:00')
 	},
 	loadData: function () {
-				// 加载之前
-		loading.style.display = 'block'
-		loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
-		erroring.style.display = 'none'
 		var that = this
 		var ajaxA,ajaxB
-			that.getstartTime().then(function(data){
-				
+			that.getstartTime().then(function(data){				
 				var mydate ={alarmValue1:10,startTime: data,orderBy:'surplus',status:0}
 				var url = myUrl + 'infusionMonitors' 
 				url += (url.indexOf('?') < 0 ? '?' : '&') + param(mydate)
@@ -65,9 +66,14 @@ var trans = {
 					}
 					ajaxA = Promise.resolve(true)
 				}).catch(function(){
-					ajaxA = Promise.resolve(true)
+					if (router.toEle == 1) {
+						ajaxA = Promise.resolve(true)
+					}	else{
+						return false
+					}
 				})
 			})
+
 		//  20mL data 获取
 		//  10ml and 20mL and> 20mL 	
 		this.getstartTime().then(function(data){
@@ -76,18 +82,26 @@ var trans = {
 			url += (url.indexOf('?') < 0 ? '?' : '&') + param(mydate)
 			Axios.get(url).then(function(res){
 				var data = res.data
-				if (data.code ==200) {					
-					that.renderHtml(data.data)
-					loading.style.display = 'none'
-					loading.innerHTML =''
-					erroring.style.display = 'none'	
+				if (data.code ==200) {
+					if(!cmp(that.listData01,data.data)){
+						that.renderHtml(data.data)
+						that.listData01 = data.data
+					}else{
+						that.renderHtml([])
+					}		
 				}
+				loading.style.display = 'none'
+				loading.innerHTML =''
+				erroring.style.display = 'none'	
 				ajaxB = Promise.resolve(true)
 			}).catch(function(err){
-				if (router.curEle == 1) {
-					erroring.style.display = 'flex'
+				if (router.toEle == 1) {					
 					loading.style.display = 'none'
 					loading.innerHTML =''
+					erroring.style.display = 'flex'
+					
+					that.listData01 = []
+					that.renderHtml(that.listData01)
 					ajaxB = Promise.resolve(true)
 				}	else{
 					loading.style.display = 'none'
@@ -101,7 +115,7 @@ var trans = {
 		})
 	},
 	loadTimerData:function(){
-		// 清除定时器
+		// 1. 清除定时器
 		clearInterval(this.timer)
 		var that = this
 		var ajaxA,ajaxB
@@ -149,8 +163,10 @@ var trans = {
 				erroring.style.display = 'none'
 				ajaxB = Promise.resolve(true)
 			}).catch(function(){
-				if (router.curEle == 1) {
+				if (router.toEle == 1) {
 					erroring.style.display = 'flex'
+					that.listData01 = []
+					that.renderHtml(that.listData01)
 					ajaxB = Promise.resolve(true)
 				}	else{
 					loading.style.display = 'none'
@@ -202,7 +218,6 @@ var trans = {
 				}else {
 					this.transScroll.refresh()
 				}
-
 	},
 	_getSpeech:function(item) {
 		var mytxt=''

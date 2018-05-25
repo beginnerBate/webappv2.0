@@ -6,8 +6,14 @@ var temp = {
 	tempScroll:"",
 	init: function () {
 		document.getElementById('sounds').style.display = 'none'
-		this.getData()
+		router.toEle = 0
+		this.list = []
 		var that = this
+		this.getData().then(function(res){
+			that.timer = setInterval(function(){
+				that.getData()
+		},TIMES)
+		})
 		tempReacrd =  function(bedNumber) {
 			var commonBox = document.getElementById('commonBox')
 			commonBox.style.display = 'block'
@@ -17,14 +23,11 @@ var temp = {
 		}
 	},
 	getData:function() {
-		clearInterval(this.timer)
+		// 1. 清除定时器
+		// clearInterval(this.timer)
 		var that = this
 		//获取体温数据
-		axios.get(myUrl+'newestTemperatures',{
-			headers:{
-				inpatientAreaCode:'001'
-			}
-		})
+		return Axios.get(myUrl+'newestTemperatures')
 		.then(function(res){
 			var data = res.data
 			if (data.code == 200) {
@@ -35,9 +38,22 @@ var temp = {
 				that.dataRender(that.list)
 				}			
 			}
-			that.timer = setInterval(function(){
-				that.getData()
-		 },TIMES)
+			erroring.style.display = 'none'
+			// 定时器
+			// clearInterval(this.timer)
+			return Promise.resolve(true)
+		}).catch(function(err){
+			if (router.toEle == 0) {
+				erroring.style.display = 'flex'
+				clearInterval(that.timer)
+				that.list = []
+				that.dataRender(that.list)
+				return Promise.resolve(true)
+			}	else{
+				erroring.style.display = 'none'
+				clearInterval(that.timer)
+				return false
+			}
 		})
 	},
 	dataRender: function (list) {
@@ -78,6 +94,7 @@ var temp = {
 		//清除 定时器
 		clearInterval(this.timer)
 		tempReacrd =function(){return false}
+		erroring.style.display = 'none'
 	}
 }
 // 发布一个打开详情的事件

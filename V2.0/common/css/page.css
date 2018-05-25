@@ -35,7 +35,8 @@
 /*ip-set-page*/
 .ip-set{
 	background: #fff;
-	display: none;
+    display: none;
+    z-index: 30;
 }
 .ip-set .box-header{
 	background: #fff;
@@ -417,4 +418,24 @@
             flex: 1 1 50%;
     color: #393939;
  }
-/* board-page */
+ .error-page{
+    position: fixed;
+    top:50px;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    display: none;
+}
+.error-page>p{
+    color: #888888;
+    font-size: 18px;
+}
+.error-page>p>.fa{
+    font-size: 18px;
+    padding-right: 5px;
+    color: #e6a23c;
+}

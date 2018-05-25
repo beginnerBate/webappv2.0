@@ -8,16 +8,21 @@ var trans = {
 	transScroll10:"",
 	transScroll20:"",
 	init:function () {
-			
+		this.listData=[]
+		this.listData01=[]
+		this.listData02=[]
+		router.toEle = 1
 		// 打开声音开关 
 		this.soundBtn = document.getElementById('sounds')
 		this.soundBtn.style.display = 'block'
 		speekCon = ''
 		//  获取数据
-		this.loadData()
-
 		var that = this
-
+		this.loadData().then(function(res){
+			that.timer = setInterval(function(){
+				that.loadData()
+			},TIMES)
+		})
 		// 监听
 		Observer.regist('transDel',function(e){
 			var commonBox = document.getElementById('commonBox')
@@ -41,7 +46,8 @@ var trans = {
 		return Promise.resolve('2018-05-21 14:32:16')
 	},
 	loadData: function () {
-		clearInterval(this.timer)
+		// 1. 清除定时器
+		// clearInterval(this.timer)
 		var that = this
 		var ajaxA,ajaxB,ajaxC
 		//  10mL data 获取
@@ -58,11 +64,20 @@ var trans = {
 							that.renderHtml20(data.data)
 							that.listData01 = data.data
 						}
-						
 					}else {
 						that.renderHtml20([])
 					}
 					ajaxA = Promise.resolve(true)
+				}).catch(function(){
+					if (router.toEle == 1) {
+						that.listData01 = []
+						that.renderHtml20(that.listData01)
+						clearInterval(that.timer)
+						ajaxA = Promise.resolve(true)
+					}	else{
+						clearInterval(that.timer)
+						return false
+					}
 				})
 			})
 			this.getstartTime().then(function(data){
@@ -86,6 +101,16 @@ var trans = {
 						that.renderHtml10(that.listData)
 					}
 					ajaxB = Promise.resolve(true)
+				}).catch(function(){
+					if (router.toEle == 1) {
+						that.listData = []
+						that.renderHtml10(that.listData)
+						ajaxB = Promise.resolve(true)
+						clearInterval(that.timer)
+					}	else{
+						clearInterval(that.timer)
+						return false
+					}
 				})
 			})
 		//  20mL data 获取
@@ -95,22 +120,35 @@ var trans = {
 			var url = myUrl + 'infusionMonitors' 
 			url += (url.indexOf('?') < 0 ? '?' : '&') + param(mydate)
 			Axios.get(url).then(function(res){
+				
 				var data = res.data
 				if (data.code ==200) {
 					if(!cmp(that.listData02,data.data)){
+						console.log(that.listData02)
 						that.renderHtml(data.data)
 						that.listData02 = data.data
 					}	
 				}else {
 					that.renderHtml([])
 				}
+				erroring.style.display = 'none'
 				ajaxC = Promise.resolve(true)
+			}).catch(function(){
+				if (router.toEle == 1) {
+					erroring.style.display = 'flex'
+					that.listData02 = []
+					that.renderHtml(that.listData02)
+					ajaxA = Promise.resolve(true)
+					clearInterval(that.timer)
+				}	else{
+					erroring.style.display = 'none'
+					clearInterval(that.timer)
+					return false
+				}
 			})
 		})
-		Promise.all([ajaxA,ajaxB,ajaxC]).then(function(){
-			that.timer = setInterval(function(){
-				that.loadData()
-			},TIMES)
+		return Promise.all([ajaxA,ajaxB,ajaxC]).then(function(){
+			return Promise.resolve(true)
 		})
 	},
 	renderHtml: function (list) {
@@ -206,6 +244,7 @@ var trans = {
 		endAudio ()
 		changeFlag = false
 		speekCon = ''
+		erroring.style.display = 'none'
 	}
 }
 function showMsgTrans(value){ 
