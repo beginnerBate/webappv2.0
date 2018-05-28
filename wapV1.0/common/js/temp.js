@@ -28,6 +28,7 @@ var temp = {
 		loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
 		erroring.style.display = 'none'
 		return Axios.get(myUrl+'newestTemperatures')
+		// return Axios.get('https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/newestTemperatures')
 		.then(function(res){
 			var data = res.data
 			if (data.code == 200) {
@@ -60,6 +61,7 @@ var temp = {
 		var that = this
 		//获取体温数据
 		Axios.get(myUrl+'newestTemperatures')
+			//  Axios.get('https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/newestTemperatures')
 		.then(function(res){
 			var data = res.data
 			if (data.code == 200) {
@@ -82,11 +84,11 @@ var temp = {
 				that.listData =[]
 				that.dataRender(that.listData)
 				that.getTimerData()
-				return false
+				// return Promise.resolve(true)
 			}	else{
 				erroring.style.display = 'none'
 				clearInterval(that.timer)
-				return false
+				// return false
 			}
 		})
 	},

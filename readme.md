@@ -132,3 +132,9 @@ click事件清除
 18. 服务器连接失败 请检查网络 页面切换取消请求
 20. V2.0 输液监控页面会闪
 21. pc 端和TV端 添加请求失败提示
+# bug
+1. V2.0 wapV1.0 数据不刷新 
+```
+https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/newestTemperatures
+```
+2. V2.0 输液监控 右侧报警没有自动适应

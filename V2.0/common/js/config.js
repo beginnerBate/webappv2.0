@@ -13,7 +13,7 @@ var myUrl = ''
 var speekCon = ''
 var speakPlaying = false
 var speaking = false
-axios.defaults.timeout =  6000
+axios.defaults.timeout =  10000
 var Axios = axios.create({
   headers:{
     inpatientAreaCode:'001'

@@ -28,6 +28,9 @@ var temp = {
 		var that = this
 		//获取体温数据
 		return Axios.get(myUrl+'newestTemperatures')
+		// dom数据更新测试 https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/newestTemperatures
+		// return Axios.get('https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/newestTemperatures')
+
 		.then(function(res){
 			var data = res.data
 			if (data.code == 200) {

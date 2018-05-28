@@ -87,6 +87,7 @@ var trans = {
 						that.renderHtml(data.data)
 						that.listData01 = data.data
 					}else{
+						that.listData01=[]
 						that.renderHtml([])
 					}		
 				}
@@ -110,9 +111,10 @@ var trans = {
 				}
 			})
 		})
-		return Promise.all([ajaxA,ajaxB]).then(function(res){
-			return Promise.resolve(true)
-		})
+		// return Promise.all([ajaxA,ajaxB]).then(function(res){
+		// 	return Promise.resolve(true)
+		// })
+		return Promise.resolve(true)
 	},
 	loadTimerData:function(){
 		// 1. 清除定时器
@@ -124,6 +126,7 @@ var trans = {
 			var url = myUrl + 'infusionMonitors' 
 			url += (url.indexOf('?') < 0 ? '?' : '&') + param(mydate)
 			Axios.get(url).then(function(res){
+				// Axios.get('https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/infusionMonitors').then(function(res){
 				var data = res.data
 				if (data.code ==200) {
 					if (cmp(that.listData,data.data)) {
@@ -152,6 +155,7 @@ var trans = {
 			var url = myUrl + 'infusionMonitors' 
 			url += (url.indexOf('?') < 0 ? '?' : '&') + param(mydate)
 			Axios.get(url).then(function(res){
+				// Axios.get('https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/infusionMonitors').then(function(res){
 				var data = res.data
 				if (data.code ==200) {
 					// 如果数据没有变化 不渲染html
@@ -175,11 +179,14 @@ var trans = {
 				}
 			})
 		})
-		Promise.all([ajaxA,ajaxB]).then(function(res){
-			that.timer = setInterval(function(){
-				that.loadTimerData()
-			},TIMES)
-		})
+		// Promise.all([ajaxA,ajaxB]).then(function(res){
+		// 	that.timer = setInterval(function(){
+		// 		that.loadTimerData()
+		// 	},TIMES)
+		// })
+		that.timer = setInterval(function(){
+			that.loadTimerData()
+		},TIMES)
 	},
 	renderHtml: function (list) {
 				var html = ''

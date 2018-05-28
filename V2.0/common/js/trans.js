@@ -72,7 +72,7 @@ var trans = {
 					if (router.toEle == 1) {
 						that.listData01 = []
 						that.renderHtml20(that.listData01)
-						clearInterval(that.timer)
+						// clearInterval(that.timer)
 						ajaxA = Promise.resolve(true)
 					}	else{
 						clearInterval(that.timer)
@@ -85,6 +85,7 @@ var trans = {
 				var url = myUrl + 'infusionMonitors' 
 				url += (url.indexOf('?') < 0 ? '?' : '&') + param(mydate)
 				Axios.get(url).then(function(res){
+					// Axios.get('https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/infusionMonitors').then(function(res){
 					var data = res.data
 					if (data.code ==200) {
 						if (cmp(that.listData,data.data)) {
@@ -106,7 +107,7 @@ var trans = {
 						that.listData = []
 						that.renderHtml10(that.listData)
 						ajaxB = Promise.resolve(true)
-						clearInterval(that.timer)
+						// clearInterval(that.timer)
 					}	else{
 						clearInterval(that.timer)
 						return false
@@ -119,7 +120,8 @@ var trans = {
 			var mydate = {startTime:data,status:0}
 			var url = myUrl + 'infusionMonitors' 
 			url += (url.indexOf('?') < 0 ? '?' : '&') + param(mydate)
-			Axios.get(url).then(function(res){
+			Axios.get(url).then(function(res){	
+				// Axios.get('https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/infusionMonitors').then(function(res){	
 				
 				var data = res.data
 				if (data.code ==200) {
@@ -129,6 +131,7 @@ var trans = {
 						that.listData02 = data.data
 					}	
 				}else {
+					that.listData02 = []
 					that.renderHtml([])
 				}
 				erroring.style.display = 'none'
@@ -139,7 +142,7 @@ var trans = {
 					that.listData02 = []
 					that.renderHtml(that.listData02)
 					ajaxA = Promise.resolve(true)
-					clearInterval(that.timer)
+					// clearInterval(that.timer)
 				}	else{
 					erroring.style.display = 'none'
 					clearInterval(that.timer)
@@ -147,9 +150,10 @@ var trans = {
 				}
 			})
 		})
-		return Promise.all([ajaxA,ajaxB,ajaxC]).then(function(){
-			return Promise.resolve(true)
-		})
+		// return Promise.race([ajaxA,ajaxB,ajaxC]).then(function(){
+		// 	return Promise.resolve(true)
+		// })
+		return Promise.resolve(true)
 	},
 	renderHtml: function (list) {
 				var html = ''
