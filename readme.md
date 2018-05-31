@@ -138,3 +138,93 @@ click事件清除
 https://www.easy-mock.com/mock/5aee8d0da4c2e060a82fb809/webservice/newestTemperatures
 ```
 2. V2.0 输液监控 右侧报警没有自动适应
+
+3. 体温显示蓝色
+
+#TV1.1
+取消数据对比 调整体温详情 移动端自适应
+
+#TVV1.2
+使用观察者模式
+https://github.com/melanke/Watch.JS
+```javascript
+// watch 测试
+
+var testwatch = WatchJS.watch
+var dataList = {
+	tempList:[]
+}
+testwatch(dataList, 'tempList',function(){
+					console.log('dd')
+}
+dataList.tempList = '11'
+dataList.tempList = '11'
+失败 每次赋值都会监听到
+```
+js 数组数据对比
+效率太低了
+```javascript 放弃
+function cmp(firstArr,secondArr){
+  var firstLen = firstArr.length
+  var secondLen = secondArr.length
+  // 1.如果长度不相等 那数组肯定不相等
+  if ( firstLen != secondLen) {
+    return false
+  }
+  // 2. 长度相等 并且都是0 的时候返回true
+  if (firstLen ==0 && secondLen ==0){
+    return true
+  }
+  // 3.长度相等 里面的对象不相等的时候遍历对象并且判断是否相
+  var Len = firstLen
+  for (var i=0; i<Len; i++) {
+    // 遍历对象
+    for(var k in firstArr[i]) {
+      return firstArr[i][k] == secondArr[i][k]? true : false
+    }
+  }
+}
+```
+js迭代器
+```javascript
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function cmp(origin, target) {
+		if ((typeof target === 'undefined' ? 'undefined' : _typeof(target)) === 'object') {
+				if ((typeof origin === 'undefined' ? 'undefined' : _typeof(origin)) !== 'object') return false;
+				var _iteratorNormalCompletion = true;
+				var _didIteratorError = false;
+				var _iteratorError = undefined;
+
+				try {
+						for (var _iterator = Object.keys(target)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+								var key = _step.value;
+
+								if (!cmp(origin[key], target[key])) return false;
+						}
+				} catch (err) {
+						_didIteratorError = true;
+						_iteratorError = err;
+				} finally {
+						try {
+								if (!_iteratorNormalCompletion && _iterator.return) {
+										_iterator.return();
+								}
+						} finally {
+								if (_didIteratorError) {
+										throw _iteratorError;
+								}
+						}
+				}
+
+				return true;
+		} else return origin === target;
+}
+```
+```javascript
+  // javascript 转字符串对比
+```
+
+#TVV1.3 wapV1.2 版本 日期修改今天和昨天
+
+
