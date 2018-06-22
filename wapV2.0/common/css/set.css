@@ -5,6 +5,11 @@
 .page-set-content{
   padding: 15px 0;
 }
+.page-set-content>p{
+  font-size: .8em;
+  color: #888888;
+  padding: 0 0 0.3em 1em;
+}
 .page-set-content>ul{
   background-color: #fff;
   border-top:1px solid #d9d9d9;
@@ -38,11 +43,15 @@
   font-weight: 600;
   padding: 0 13px;
 }
-.page-set-content>ul:first-child>li:first-child>div:first-child{
-  border-bottom: 1px solid #d9d9d9;
+
+.page-set-content>ul.set-list>li:first-child>div:first-child{
+  border-top: 0;
 }
-.page-set-content>ul:first-child{
-  margin-bottom: 20px;
+.page-set-content>ul.set-list>li>div:first-child{
+  border-top: 1px solid #d9d9d9;
+}
+.page-set-content>ul.set-list{
+  margin-bottom: 10px;
 }
 .page-set-content>ul>li>div>.on-off{
   width: 51px;

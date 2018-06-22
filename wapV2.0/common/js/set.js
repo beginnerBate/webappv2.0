@@ -33,7 +33,8 @@ var myset = {
       // 页面加载
       var that = this
       this.setPage.innerHTML = '<div class="page-set-content">'+
-                                  '<ul>'+
+                                  '<p>服务器设置</p>'+
+                                  '<ul class="set-list">'+
                                    ' <li id="ipset">'+
                                       '<div>'+
                                         '<span class="name">IP</span>'+
@@ -48,7 +49,41 @@ var myset = {
                                         '<span class="fa fa-angle-right"></span>'+
                                       '</div>'+
                                     '</li>'+
+                                    '<li id="codeset">'+
+                                      '<div>'+
+                                        '<span class="name">病区编号</span>'+
+                                        '<span class="name-value">'+port+'</span>'+
+                                        '<span class="fa fa-angle-right"></span>'+
+                                      '</div>'+
+                                    '</li>'+
                                   '</ul>'+
+                                  '<p>采集端主机设置</p>'+
+                                  '<ul class="set-list">'+
+                                   ' <li id="ipset">'+
+                                      '<div>'+
+                                        '<span class="name">采集端主机IP</span>'+
+                                        '<span class="name-value">'+IP+'</span>'+
+                                        '<span class="fa fa-angle-right"></span>'+
+                                      '</div>'+
+                                    '</li>'+
+                                    '<li id="portset">'+
+                                      '<div>'+
+                                        '<span class="name">采集端主机端口</span>'+
+                                        '<span class="name-value">'+port+'</span>'+
+                                        '<span class="fa fa-angle-right"></span>'+
+                                      '</div>'+
+                                    '</li>'+
+                                  '</ul>'+
+                                  '<p>滴速报警值</p>'+
+                                  '<ul class="set-list">'+
+                                    '<li>'+
+                                      '<div>'+
+                                        '<span class="name">滴速报警值</span>'+
+                                        '<span class="name-value"></span>'+
+                                      '</div>'+
+                                    '</li>'+
+                                  '</ul>'+                                  
+                                  '<p>语音报警设置</p>'+
                                   '<ul>'+
                                     '<li>'+
                                       '<div>'+
@@ -59,7 +94,8 @@ var myset = {
                                         '</span>'+
                                       '</div>'+
                                     '</li>'+
-                                  '</ul>'
+                                  '</ul>'+
+                                '</div>'
         setTimeout(function(){
           that.loading.style.display = 'none'
           that.loading.innerHTML ='0'

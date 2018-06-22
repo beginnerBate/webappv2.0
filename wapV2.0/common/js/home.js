@@ -1,6 +1,8 @@
 // home.js
 // 导航和页面加载模块
 var flag = false
+var router = new Router()
+
 	//  设置ip和端口
 var loading = document.getElementById('sloading')
 var erroring = document.getElementById('erroring')
@@ -45,17 +47,6 @@ homeConfig.prototype = {
 			
 			// 第二步
 			Observer.fire('second')
-			// if (flag) {
-			// 	// 显示 tip
-			// 	tip.style.display = 'block'
-			// 	errTip.style.display = 'none'
-			// 	errTip.innerHTML = ''
-			// 	setTimeout(function(){
-			// 		document.getElementById('box').style.display = 'none'
-			// 		tip.style.display = 'none'
-			// 	},500)
-			// 	home.init()	
-			// }
 		}
 	},
 	second: function () {
@@ -151,10 +142,13 @@ homeConfig.prototype = {
 				}	
 	}
 }
+
 // homeConfig 测试
 var test = new homeConfig()
 // 第一步
-test.first()
+Observer.regist('first', function(){
+	test.first()
+})
 
 // 第二步
 Observer.regist('second',function(e){
@@ -166,12 +160,11 @@ Observer.regist('third',function(e){
 	test.third()
 })
 
-// 完成设置 初始化路由 路由监听页面
-var router = new Router()
+// 完成设置 
 Observer.regist('finish',function(e){
 	setItem('flag',true)
 		// 页面初始化
-		router.init()
+		home.init()
 })
 
 // 首页模块
@@ -190,14 +183,21 @@ var home = {
 			})
 			// 设置滴速报警值
 			dotRateAlarmValue = getItem("dotRateAlarmValue",true)
-			// 移除box
+			// 初始化页面
+			this.initPage()
+			// 初始化路由
+			this.initRouter()
+			document.body.removeChild(document.getElementById('box'))			
+			return Promise.resolve(true)
+			
 		}else{
-			document.getElementById('box').style.display ='block'
+			Observer.fire('first')
+			return Promise.reject("unfinish")
 		}
 	},
 	initPage: function () {
 		var pageHtml = '<section class="top-header" id="topHeader">'+
-											'<h1 id="title"></h1>'+
+											'<h1 id="title">体温监测</h1>'+
 										'</section>'+
 										'<section class="header wap">'+
 											'<div class="nav-wrapper">'+
@@ -228,6 +228,58 @@ var home = {
 											'</div>'+
 										'</section>';
 			document.getElementById('pageView').innerHTML = pageHtml;
+	},
+	initRouter: function () {
+		router.init()
+				// 初始化导航 curEle toEle
+				var btn = document.querySelectorAll('.nav>li')
+
+				// 首页默认体温页面
+				router.route("/", function() {
+					console.log('-----home------');
+					// 页面初始化
+					home.init();
+					// 导航设置
+					[].slice.call(btn).forEach(function(btnEle){
+						btnEle.classList.remove('active')
+					})
+					btn[0].classList.add('active')
+				})
+				// 首页默认体温页面
+				router.route("/temp", function() {
+					console.log('-----temp------');
+					// 导航设置
+					[].slice.call(btn).forEach(function(btnEle){
+						btnEle.classList.remove('active')
+					})
+					btn[0].classList.add('active')
+					// 页面初始化
+					temp.init()
+					trans.desorty()
+				})
+				// 输液报警
+				router.route("/trans", function() {
+					console.log('-----trans------');
+						// 导航设置
+						[].slice.call(btn).forEach(function(btnEle){
+							btnEle.classList.remove('active')
+						})
+						btn[1].classList.add('active')
+						// 页面初始化	 
+					trans.init()
+					temp.desorty()
+				})
+				// 电子白板页面
+				router.route("/set", function() {
+					console.log('-----set----');
+						// 导航设置
+						[].slice.call(btn).forEach(function(btnEle){
+							btnEle.classList.remove('active')
+						})
+						btn[2].classList.add('active')
+					myset.init()
+					//  temp.desorty()
+				}) 
 	}
 }
     
@@ -255,54 +307,4 @@ var systemTime = {
 		})
 	}
 }
-
-//路由模块
-// 初始化导航 curEle toEle
-var btn = document.querySelectorAll('.nav>li')
-
-// 首页默认体温页面
-router.route("/", function() {
-	console.log('-----home------');
-	// 页面初始化
-	home.init();
-	// 导航设置
-	[].slice.call(btn).forEach(function(btnEle){
-		btnEle.classList.remove('active')
-	})
-	btn[0].classList.add('active')
-})
-// 首页默认体温页面
-router.route("/temp", function() {
-	console.log('-----temp------');
-	// 导航设置
-  [].slice.call(btn).forEach(function(btnEle){
-		btnEle.classList.remove('active')
-	})
-	btn[0].classList.add('active')
-	// 页面初始化
-	temp.init()
-	trans.desorty()
-})
-// 输液报警
-router.route("/trans", function() {
-	 console.log('-----trans------');
-		// 导航设置
-		[].slice.call(btn).forEach(function(btnEle){
-			btnEle.classList.remove('active')
-		})
-		btn[1].classList.add('active')
-		// 页面初始化	 
-	 trans.init()
-	 temp.desorty()
-})
-// 电子白板页面
-router.route("/set", function() {
-	 console.log('-----set----');
-		// 导航设置
-		[].slice.call(btn).forEach(function(btnEle){
-			btnEle.classList.remove('active')
-		})
-		btn[2].classList.add('active')
-	 myset.init()
-	//  temp.desorty()
-})
+home.init()
