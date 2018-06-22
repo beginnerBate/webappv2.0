@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui">
+  <meta name="full-screen" content="yes">
+  <meta name="browsermode" content="application">
+  <meta name="x5-orientation" content="portrait"><meta name="x5-fullscreen" content="true"><meta name="x5-page-mode" content="app">
+	<title>智能医疗检测系统</title>
+	<!-- 智能医疗检测系统 手机版 -->
+  <link rel="stylesheet" href="common/css/common.css">
+  <link rel="stylesheet" href="common/bin/css/font-awesome.min.css"/>
+  <link rel="stylesheet" href="common/css/home.css">
+  <link rel="stylesheet" href="common/css/page.css">
+  <link rel="stylesheet" href="common/css/set.css">
+</head>
+<body class="home">
+	<!-- 服务器设置 -->
+	<div id="box" class="box-wrapper ip-set">
+			<div class="box-content" id="boxCon">
+				<div class="box-header">
+					<i class="fa fa-cog"></i><span> 服务器设置</span>
+				</div>
+				<div class="form-wrapper">
+					<span id="tip"><i class="fa  fa-check-circle"></i> 设置成功</span>
+					<span id="error"></span>
+					
+					<div class="form-row">
+						<label class="ls5">IP:</label>
+						<input type="text" id="ip" value="" />
+					</div>
+					<div class="form-row ">
+						<label>端口:</label><input type="text" id="port" />
+					</div>
+					<div class="form-row ">
+						<label>病区编号:</label><input type="text" id="inpatientAreaCode" />
+					</div>
+					<div class="form-row">
+						<input type="button" id="setIp" class="btn" value="下一步"/>
+					</div>
+				</div>
+			</div>
+	</div>
+	<!-- 页面内容 -->
+	<div id="pageView"></div>
+  <!--公共弹出框 start 体温记录 输液详情 -->
+  <div class="child-page" id='commonBox'></div>
+  <!--公共弹出框 end-->
+		<span class="alert" id="alert">请输入IP</span>
+		<span class="s-tip" id="stip">设置成功</span>
+		<span class="s-loading" id="sloading">设置成功</span>
+		<div id="sure" class="sure-alert"></div>
+	<!-- 404页面 -->
+	<div class="error-page" id="erroring">
+		<p><span class="fa fa-exclamation-triangle"></span>连接失败,请检查网络!</p>
+	</div>
+</body>
+
+<script src="common/bin/bscroll.min.js" charset="utf-8"></script>
+<script src="common/bin/axios.min.js" charset="utf-8"></script>
+<script src="common/bin/router.js"></script>
+<script src="common/js/config.js" charset="utf-8"></script>
+<script src="common/js/temp.js"></script>
+<script src="common/js/alarm.js"></script>
+<script src="common/js/set.js"></script>
+<script src="common/js/trans.js"></script>
+<script src="common/js/home.js"></script>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>get</title>
+</head>
+<body>
+  <p>axios取消请求测试</p>
+  <div id="eboard">
+    <!-- 全屏画布 -->
+  <canvas id="canvas"></canvas>
+  <!-- 功能菜单 -->
+  <ul id="menu">
+    <li>
+      <span><i class="fa fa-pencil" aria-hidden="true"></i></span>
+    </li>
+    <li>
+      <span class="fa fa-italic"></span>
+    </li>
+    <li>
+      <span></span>
+    </li>
+    <li>
+      <span></span>
+    </li>
+    <li>
+      <span class="fa fa-cog"></span>
+    </li>
+    <li>
+      <span class="fa fa-asterisk"></span>
+    </li>
+    <li>
+      <span class="fa fa-eraser "></span>
+    </li>
+    <li>
+      <span class="fa fa-repeat"></span>
+    </li>
+    <!--<li>
+      <span class="fa fa-arrow-circle-down"></span>
+    </li>		-->
+  </ul>
+  <!-- 颜色画笔选择侧边栏 -->
+  <div id="sidebar">
+    <div class="sidebar-draw">
+      <h2>画笔</h2>
+      <ul>
+        <li>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+        </li>
+        <li>
+          <span></span>
+        </li>			
+      </ul>
+    </div>
+    <div class="sidebar-color">
+      <h2>颜色</h2>
+      <ul>
+        <li></li>
+        <li></li>				
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+    </div>
+  </div>
+  <!-- 弹窗提示框 -->
+  <div id="btip" class="b-tip">
+    <div class="b-tip-main">
+      <span></span>
+      <span class="text">你选择了红色！</span>
+    </div>
+  </div>
+</div>
+</body>
+<!-- 引入get.js -->
+<script src="./common/bin/axios.min.js"></script>
+<script>
+  var url = 'http://192.168.0.106:8888/webservice/common/sysDateTime';
+  var CancelToken = axios.CancelToken;
+  var cancel;
+  axios.get(url,{
+    cancelToken: new CancelToken(function executor(c) {
+      // executor 函数接收一个 cancel 函数作为参数
+      cancel = c;
+    })
+  }).then(function(res){
+     console.log('axios1')
+  })
+var counter = 0
+setInterval(function(){
+  if(counter>=3){
+    cancel();
+  }else{
+    counter++
+    axios.get(url,{
+    cancelToken: new CancelToken(function executor(c) {
+      // executor 函数接收一个 cancel 函数作为参数
+      cancel = c;
+    })
+  }).then(function(res){
+    console.log('axios2')
+  })
+  }
+},1000)
+
+//  取消多个请求
+function getData(){
+  axios.get('http://192.168.0.106:8888/webservice/common/sysDateTime',{
+    cancelToken: new CancelToken(function executor(c) {
+      // executor 函数接收一个 cancel 函数作为参数
+      cancel = c;
+    })
+  }).then(function(){console.log('axios21')})
+}
+var a=0
+setInterval(function(){
+  if(a>=3){
+    cancel()
+  }else{
+    a++
+    getData()
+  }
+},1000)
+
+</script>
+</html>
