@@ -366,17 +366,14 @@
         -ms-flex-pack: justify;
             justify-content: space-between;
     line-height: 36px;
-    border-bottom: 1px solid #d4d4d4;    
+    background: #f9f9f9;
+    margin: 0.8em 0;
+    font-size: 0.9em;
+    color: #555;
+    box-shadow: 1px 1px 5px #d4d4d4;  
  }
- .trans-list-show> li:nth-of-type(2n-1){
-    background: #fafafa; 
- }
-
- .trans-list-show>li>span{
-    -webkit-box-flex: 1;
-        -ms-flex: 1 1 50%;
-            flex: 1 1 50%;
-    color: #393939;
+ .trans-list-show>li>div{
+     width: 100%;
  }
 #top-tip{
     -webkit-transform: translate(-50%,-50px);
@@ -406,4 +403,72 @@
     font-size: 18px;
     padding-right: 5px;
     color: #e6a23c;
+}
+.trans-record-list-top>p{
+    padding: 0.3em;
+    font-size: 0.9em;
+    line-height: 0.9em;
+    color: #333;
+}
+.trans-record-list-top>p:last-child{
+    padding: 0.3em;
+    font-size: 0.8em;
+    line-height: 0.9em;
+    color: #666666;
+}
+.trans-record-list-item{
+    display: flex;
+}
+.trans-record-list-item>span:last-child{
+    padding-left: 1.2em;
+}
+.trans-record-list-label{
+    font-size: 0.8em;
+    color:#888;
+}
+.trans-record-list-label>.status{
+    padding: 0.1em 0.6em;
+    border: 1px solid;
+    border-radius: 10px;
+}
+.trans-record-list-label>.status.status2{
+    color:#e6a23c;
+}
+.trans-record-list-label>.status.status0{
+    color:green;
+}
+.trans-record-list-label>.continue{
+  padding: 0.1em 0.6em;
+  border:1px solid;
+  border-radius: 10px;
+  color: green;
+}
+.trans-record-list-label>.suspend{
+  padding: 0.1em 0.6em;
+  border:1px solid;
+  border-radius: 10px;
+  color: #e6a23c;
+}
+.trans-record-list-label>span:nth-of-type(2){
+    margin-left: 45%;
+}
+.trans-record-list-label>.stop{
+    padding: 0.1em 0.6em;
+    border:1px solid;
+    border-radius: 10px;
+    margin-left: 1.2em;
+    color:#ea5161;
+}
+.trans-record-detials{
+	padding: 1em 0;
+}
+.trans-record-detials>p {
+	padding: 0.6em;
+    font-size: .9em;
+    padding-left: 2em;
+    border-bottom: 1px solid #d4d4d4;
+    color: #666;
+}
+.trans-record-detials>p:nth-of-type(2n){
+	background: #fafafa;
 }

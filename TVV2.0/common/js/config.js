@@ -23,7 +23,7 @@ axios.defaults.timeout =  10000
 // axios取消设置
 var CancelToken = axios.CancelToken;
 var cancel;
-var cancel10,cancel20;
+var cancel10,cancel20,cancelAll;
 // -------------------------------------------- axios全局配置ends---------------------------------------
 
 // -------------------------------------------- 本地存储start-------------------------------------------

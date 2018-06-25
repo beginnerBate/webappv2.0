@@ -13,19 +13,15 @@ var speekCon = ''
 var speakPlaying = false
 var speaking = false
 var dotRateAlarmValue;
+var Axios;
 // --------------------------------------axios全局设置start-------------------------------------
 axios.defaults.timeout =  10000
 var CancelToken = axios.CancelToken;
 var cancel;
-var Axios = axios.create({
-  headers:{
-    inpatientAreaCode:'001'
-	}
-})
 // axios取消设置
 var CancelToken = axios.CancelToken;
 var cancel;
-var cancel10,cancel20;
+var cancelAll,cancel10;
 // ----------------------------------------axios全局设置ends--------------------------------------
 // 初始化 
 initData([
@@ -85,6 +81,16 @@ var config = {
 	setCODE:function (sCODE) {
 		setItem('inpatientAreaCode',sCODE)
 		this.setUrl()
+		return true
+	},
+	setDaIP:function(sIP){
+		setItem('daIP',sIP)
+		// this.setUrl()
+		return true
+	},
+	setDaPORT:function (sPORT) {
+		setItem('daPort',sPORT)
+		// this.setUrl()
 		return true
 	},
 	setSounds:function(sounds){

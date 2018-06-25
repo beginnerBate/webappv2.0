@@ -188,11 +188,11 @@ var home = {
 			// 初始化路由
 			this.initRouter()
 			document.body.removeChild(document.getElementById('box'))			
-			return Promise.resolve(true)
+//			return Promise.resolve(true)
 			
 		}else{
 			Observer.fire('first')
-			return Promise.reject("unfinish")
+//			return Promise.reject("unfinish")
 		}
 	},
 	initPage: function () {

@@ -122,13 +122,16 @@ function delAlarm (infusionAlarmId) {
 }
 var changeFlagTimer
 changeFlagTimer = setInterval(function(){
-	// console.log(changeFlag)
-	if (changeFlag) {
+	if (router.currentUrl=='/trans'){
+		if (changeFlag) {
 		// console.log('ddd')
 		clearInterval(changeFlagTimer)
 	}else {
 		// console.log('ddd')
 		Observer.fire('play',{sounds:trans.sounds})
+	}	
+	}else {
+		clearInterval(changeFlagTimer)
 	}
 },20000)
 function endAudio () {
@@ -142,7 +145,6 @@ Observer.regist('play',function(e){
 	if (soundsFlag == 'off') {
 		return
 	}
-	// console.log(speekCon)
 	android.speakInit()
 	android.speak(speekCon)
 })

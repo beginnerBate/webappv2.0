@@ -11,8 +11,8 @@ var trans = {
 	transScroll20:"",
 	init:function () {
 		// 取消cancel
-		if (typeof cancel == "function"){
-			cancel()
+		if (typeof cancelAll == "function"){
+			cancelAll()
 		}
 		if (typeof cancel10 == "function"){
 			cancel10()
@@ -91,8 +91,8 @@ var trans = {
 	getData: function() {
 		// 1. 清除定时器
 		clearInterval(this.timer)
-		if (typeof cancel === "function") {
-			cancel()
+		if (typeof cancelAll === "function") {
+			cancelAll()
 		}
 		var that = this;
 	  return	this.getstartTime().then(function(data){
@@ -100,7 +100,7 @@ var trans = {
 		  return Axios.get(url,{
 				cancelToken: new CancelToken(function executor(c) {
 					// executor 函数接收一个 cancel 函数作为参数
-					cancel = c;
+					cancelAll = c;
 				})
 			}).then(function(res){	
 				var data = res.data
@@ -125,8 +125,8 @@ var trans = {
 			}).catch(function(){
 				// 清除定时器
 				clearInterval(that.timer)
-				if (typeof cancel == "function") {
-					 cancel()
+				if (typeof cancelAll == "function") {
+					 cancelAll()
 				}
 				if (router.currentUrl == "/trans") {
 					erroring.style.display = 'flex'
@@ -375,8 +375,8 @@ var trans = {
 		changeFlag = false
 		speekCon = ''
 		erroring.style.display = 'none'
-		if(typeof cancel =="function") {
-			cancel()
+		if(typeof cancelAll =="function") {
+			cancelAll()
 		}
 		if(typeof cancel10 =="function") {
 			cancel10()
@@ -593,7 +593,6 @@ function closeTip () {
 }
 // 1.输液详情页面
 function transdetails(eq,id) {
-	console.log(eq,id)
 	var trEle = document.getElementById('transRecordList').getElementsByTagName('tr')[eq]
 	var trAll = document.getElementById('transRecordList').getElementsByTagName('tr');
 	[].slice.call(trAll).forEach(function(val){

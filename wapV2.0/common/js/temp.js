@@ -22,8 +22,8 @@ var temp = {
 		this.tempList = document.getElementById('tempList')
 		// 数据渲染
 		this.getData()
-		tempReacrd =  function(bedNumber) {
-			tempRecord.init(bedNumber)
+		tempReacrd =  function(bedNumber,devicePositionId) {
+			tempRecord.init(bedNumber,devicePositionId)
 		}
 	},
   initPage: function() {
@@ -46,18 +46,17 @@ var temp = {
 		if (this.initCounter == 1) {
 			loading.style.display = 'block'
 			loading.innerHTML ='<i class="fa fa-spinner fa-spin fa-2x"></i>'
-			// erroring.style.display = 'none'	
+//			erroring.style.display = 'none'	
 		}
 		// 3. 获取体温数据
 		var that = this
-		Axios.get(myUrl+'newestTemperatures',{
+		Axios.get(myUrl+'app/newestTemperatures',{
 			cancelToken: new CancelToken(function executor(c) {
 				// executor 函数接收一个 cancel 函数作为参数
 				cancel = c;
 			})
 		})
 		.then(function(res){
-			console.log(that.initCounter)
 			if (that.initCounter == 1) {
 				loading.style.display = 'none'
 				loading.innerHTML =''	
@@ -65,7 +64,6 @@ var temp = {
 			that.initCounter++	
 			var data = res.data
 			if (data.code == 200) {
-				console.log('ff',that.listData)
 				// 判断数据是否相等然后渲染DOM				
 				if (!cmp(that.listData,data.data)){
 					that.dataRender(data.data)
@@ -89,6 +87,7 @@ var temp = {
 				loading.style.display = 'none'
 				loading.innerHTML =''	
 			}
+			that.initCounter++
 			// 1. 清除定时器
 			clearInterval(that.timer)
 			if (typeof cancel == "function") {
@@ -115,7 +114,7 @@ var temp = {
 	dataRender: function (list) {
 		var html = ''
 		for (var i =0;i<list.length;i++) {
-			html += '<li onclick="tempReacrd(\''+list[i].bedNumber+'\')" value="'+list[i].bedNumber+'">'
+			html += '<li onclick="tempReacrd(\''+list[i].bedNumber+'\',\''+list[i].devicePositionId+'\')" value="'+list[i].bedNumber+'">'
             if (list[i].temperatureValue>=37.5) {
                 html +='<div class="m-temp-item danger">'+
 								'<p class="bed-num">'+list[i].bedNumber+'床</p>'+
@@ -160,6 +159,7 @@ var temp = {
 // 定义一个 tempRecord对象
 var tempRecord = {
 	bedNumber:'',
+	devicePositionId:"",
 	page:1,
 	rows:10,
 	pageCount:'',
@@ -167,15 +167,16 @@ var tempRecord = {
 	firstLoad:1,
 	pageChild:"",
 	orderScroll:"",
-	init:function(id) {
+	init:function(bedNumber,devicePositionId) {
 		temp.desorty()
 		//  初始化数据
-		this.bedNumber = id
+		this.bedNumber = bedNumber
+		this.devicePositionId = devicePositionId
 		//  初始化页面结构
 		this.pageChild = document.getElementById('commonBox')
 		this.pageChild.innerHTML = '<div id="tempRecord" class="temp-record">'+
 											'<div class="child-top">'+
-														'<span id="back" class="back fa fa-angle-left" onclick="backtemp()"><span>'+id+'床</span></span>'+
+														'<span id="back" class="back fa fa-angle-left" onclick="backtemp()"><span>'+bedNumber+'床</span></span>'+
 														'<h1>体温历史记录</h1>'+
 													'</div>'+
 								'<div class="temp-record-conent" id="wrapperList">'+
@@ -208,16 +209,14 @@ var tempRecord = {
 		var mydata = {
 			    page: that.page,
 			    rows: that.rows,
-			    bedNumber: that.bedNumber
 				}
-		var url = myUrl+'temperatures'
+		var url = myUrl+'app/devicePositions/'+that.devicePositionId+'/temperatures'
 		url += (url.indexOf('?') < 0 ? '?' : '&') + param(mydata)
 		// 请求数据
 		Axios.get(url).then(function(res){
 			var data = res.data
             if (data.code=='200') {         
-						// 分页处理	
-						console.log('dd')          
+						// 分页处理	      
 	          that.page = data.curPage
 						that.pageCount = data.pageCount
 						if (that.page == 1){
@@ -247,8 +246,8 @@ var tempRecord = {
     	var html = ''
     	for (var i =0; i<list.length;i++) {
     	    html += '<li>'+
-						'<span>温度:'+list[i].temp+'</span>'+
-						'<span class="temp-list-time">时间:'+list[i].time+'</span>'+
+						'<span>温度: '+list[i].temp+'</span>'+
+						'<span class="temp-list-time">时间: '+list[i].time+'</span>'+
 					'</li>'
     	}
 			document.getElementById('tempRecordList').innerHTML = html
@@ -256,20 +255,20 @@ var tempRecord = {
 			var contentList = document.getElementById('contentList')
 			contentList.style.minHeight = wrapperList.offsetHeight +1 +"px";
 			this.orderScroll = new BScroll(wrapperList,{
-        probeType:3,
-        pullDownRefresh: {
-          threshold: 50,
-          stop: 20
-        },
-        pullUpLoad:{
-          threshold:-80
-        },
-        mouseWheel: {    // pc端同样能滑动
-          speed: 20,
-          invert: false
-        },
-        useTransition:false,  // 防止iphone微信滑动卡顿
-      })
+												        probeType:3,
+												        pullDownRefresh: {
+												          threshold: 50,
+												          stop: 20
+												        },
+												        pullUpLoad:{
+												          threshold:-80
+												        },
+												        mouseWheel: {    // pc端同样能滑动
+												          speed: 20,
+												          invert: false
+												        },
+												        useTransition:false,  // 防止iphone微信滑动卡顿
+												      })
       // 上拉加载数据
       this.orderScroll.on('pullingUp',function(){
         // 防止一次上拉触发两次事件,不要在ajax的请求数据完成事件中调用下面的finish方法,否则有可能一次上拉触发两次上拉事件
